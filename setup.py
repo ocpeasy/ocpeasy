@@ -9,6 +9,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        cli=cli:say_hello
+        cli=cli:deploy
     ''',
 )
