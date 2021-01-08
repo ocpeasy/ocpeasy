@@ -3,4 +3,4 @@ install:
 	&& poetry install
 
 start:
-	poetry run python3 cli.py say_hello
+	poetry run python3 cli.py deploy
