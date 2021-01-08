@@ -7,6 +7,8 @@ authors = ["David Barrat <david@barrat.io>"]
 [tool.poetry.dependencies]
 python = "3.9"
 fire = "^0.3.1"
+GitPython = "^3.1.12"
+simple-term-menu = "^0.10.4"
 
 [tool.poetry.dev-dependencies]
 yapf = "^0.30.0"
