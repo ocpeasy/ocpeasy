@@ -20,6 +20,11 @@ I added the following to my `.zshrc`
 
 `export PATH=$PATH:$HOME/.poetry/bin`
 
+## Roadmap
+
+- Configuring Tests/Linting
+- Generate Project yaml `ocpeasy.yml`
+
 ## Examples
 
 ## License

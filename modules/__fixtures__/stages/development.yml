@@ -1,0 +1,8 @@
+ocpProject: dedrr
+containerId: devflask
+containerRoute: devflask-dedrr.statwb.eu.novartis.net
+gitRepository: http://gogs-cicd.statwb.eu.novartis.net/dbrrt/flask-poetry-ocp.git
+gitBranch: dev
+gitCredentialsId: gogs-repo-pw
+podReplicas: 2
+stage: development
