@@ -1,0 +1,8 @@
+openshiftVersion: '3.4'
+openshiftStategy: Docker
+frameworkId: flask
+technology: python
+templateUri: https://www.github.com/...
+hashRef: 60248dac-5a42-40c1-8a08-f04b21dba1d4
+createdAt: "2021-01-08T23:40:57.920Z"
+refreshedAt: "2021-01-08T23:40:57.920Z"

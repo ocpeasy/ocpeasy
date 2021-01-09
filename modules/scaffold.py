@@ -50,7 +50,7 @@ def cleanWorkspace(sessionUuid: str):
     shutil.rmtree(f'/tmp/{sessionUuid}', ignore_errors=True)
 
 
-def build():
+def scaffold():
     sessionUuid = uuid.uuid4().hex
     getStrategyVersions(sessionUuid)
     getProgrammingLanguage()
