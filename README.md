@@ -24,6 +24,8 @@ I added the following to my `.zshrc`
 
 - Configuring Tests/Linting
 - Generate Project yaml `ocpeasy.yml`
+- Generate Stage yaml `<stage>.yml`
+- Support SSH Keys for cloning (read: https://stackoverflow.com/questions/28291909/gitpython-and-ssh-keys)
 
 ## Examples
 
