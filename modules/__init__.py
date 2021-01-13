@@ -1,3 +1,3 @@
-from .scaffold import *
-from .buildStage import *
-from .deploy import *
+from .scaffold import scaffold
+from .buildStage import buildStage
+from .deploy import deploy
