@@ -1,7 +1,6 @@
 # OCPeasy - Command Line Interface
 
-![](https://github.com/ocpeasy/ocpeasy/workflows/ocpeasy-ubuntu-ci
-/badge.svg)
+![](https://github.com/ocpeasy/ocpeasy/workflows/ocpeasy-ubuntu-ci/badge.svg)
 
 ## Introduction
 
