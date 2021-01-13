@@ -6,3 +6,6 @@ install:
 
 scaffold:
 	$(POETRY_BIN) run python3 cli.py scaffold
+
+test:
+	$(POETRY_BIN) run testify __tests__

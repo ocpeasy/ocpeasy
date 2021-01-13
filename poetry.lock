@@ -54,6 +54,19 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "mock"
+version = "4.0.3"
+description = "Rolling backport of unittest.mock for all Pythons"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+test = ["pytest (<5.4)", "pytest-cov"]
+docs = ["sphinx"]
+build = ["twine", "wheel", "blurb"]
+
+[[package]]
 name = "pycodestyle"
 version = "2.6.0"
 description = "Python style guide checker"
@@ -110,6 +123,18 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "testify"
+version = "0.11.0"
+description = "Testing framework"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = ">=1.7.3"
+mock = "*"
+
+[[package]]
 name = "yapf"
 version = "0.30.0"
 description = "A formatter for Python code."
@@ -120,7 +145,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9"
-content-hash = "6c2bd85c31f69543e50dc71260259022a63da5c4204004592bce2147b63be092"
+content-hash = "2b08e93d6c329bfb342abd3e8d7743a5a874cd610335d80eec4e87f4f88a8173"
 
 [metadata.files]
 fire = [
@@ -141,6 +166,10 @@ gitpython = [
 mccabe = [
     {file = "mccabe-0.6.1-py2.py3-none-any.whl", hash = "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42"},
     {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
+]
+mock = [
+    {file = "mock-4.0.3-py3-none-any.whl", hash = "sha256:122fcb64ee37cfad5b3f48d7a7d51875d7031aaf3d8be7c42e2bee25044eee62"},
+    {file = "mock-4.0.3.tar.gz", hash = "sha256:7d3fbbde18228f4ff2f1f119a45cdffa458b4c0dee32eb4d2bb2f82554bac7bc"},
 ]
 pycodestyle = [
     {file = "pycodestyle-2.6.0-py2.py3-none-any.whl", hash = "sha256:2295e7b2f6b5bd100585ebcb1f616591b652db8a741695b3d8f5d28bdc934367"},
@@ -179,6 +208,10 @@ smmap = [
 ]
 termcolor = [
     {file = "termcolor-1.1.0.tar.gz", hash = "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"},
+]
+testify = [
+    {file = "testify-0.11.0-py2.py3-none-any.whl", hash = "sha256:4c47accec14ef2567b6acaf25df3d0a4dc9a3c2fba078982520fd38bea1c0da4"},
+    {file = "testify-0.11.0.tar.gz", hash = "sha256:04880b44dd34494e498018bf7c0c79370b4f61bee048e2be76068d0a36ab1c82"},
 ]
 yapf = [
     {file = "yapf-0.30.0-py2.py3-none-any.whl", hash = "sha256:3abf61ba67cf603069710d30acbc88cfe565d907e16ad81429ae90ce9651e0c9"},
