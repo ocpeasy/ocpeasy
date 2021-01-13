@@ -11,4 +11,4 @@ lint:
 	$(POETRY_BIN) run flake8 --select E123,W503 src/* -v
 
 test:
-	$(POETRY_BIN) run testify __tests__
+	$(POETRY_BIN) run pytest __tests__
