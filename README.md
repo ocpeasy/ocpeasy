@@ -1,5 +1,8 @@
 # OCPeasy - Command Line Interface
 
+![](https://github.com/ocpeasy/ocpeasy/workflows/ocpeasy-ubuntu-ci
+/badge.svg)
+
 ## Introduction
 
 OCPeasy consists in a CLI to facilitate the deployment of OpenShift applications, generating the configuration based on your project requirements.
