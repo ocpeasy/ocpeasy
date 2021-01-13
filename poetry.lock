@@ -62,9 +62,9 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-test = ["pytest (<5.4)", "pytest-cov"]
-docs = ["sphinx"]
 build = ["twine", "wheel", "blurb"]
+docs = ["sphinx"]
+test = ["pytest (<5.4)", "pytest-cov"]
 
 [[package]]
 name = "pycodestyle"
@@ -131,8 +131,8 @@ optional = false
 python-versions = "*"
 
 [package.dependencies]
-six = ">=1.7.3"
 mock = "*"
+six = ">=1.7.3"
 
 [[package]]
 name = "yapf"
@@ -144,8 +144,8 @@ python-versions = "*"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "3.9"
-content-hash = "2b08e93d6c329bfb342abd3e8d7743a5a874cd610335d80eec4e87f4f88a8173"
+python-versions = "3.9.0"
+content-hash = "ddac02cc6a9dcdbdf3fcff4c85a0cfc82f8995a0a89e7c13f84bdb87b3bd6de3"
 
 [metadata.files]
 fire = [
