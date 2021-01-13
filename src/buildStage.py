@@ -1,2 +1,2 @@
 def buildStage(stageId: str):
-    return f'buildStage {stageId}'
+    return f"buildStage {stageId}"

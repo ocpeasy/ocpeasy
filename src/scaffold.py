@@ -11,11 +11,12 @@ from .constants import (
     ALPHABET_LIST_CHAR,
     MENU_CURSOR_STYLE,
     PREFIX_STRATEGY,
-    SHOW_SEARCH_HINT
+    SHOW_SEARCH_HINT,
 )
 
+
 def getStrategyVersions(sessionUuid: str):
-    PATH_SESSION = f'/tmp/{sessionUuid}'
+    PATH_SESSION = f"/tmp/{sessionUuid}"
     Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION)
     _, folders, _ = next(walk(PATH_SESSION))
     strategies = list(filter(lambda x: x.startswith(PREFIX_STRATEGY), folders))
@@ -23,89 +24,102 @@ def getStrategyVersions(sessionUuid: str):
     counter = 0
 
     for el in strategies:
-        tmpStrategyString = el.replace(PREFIX_STRATEGY, '').replace('_', '.')
-        strategyOptions.append(f'[{ALPHABET_LIST_CHAR[counter]}] Red Hat OpenShift® {tmpStrategyString}')
+        tmpStrategyString = el.replace(PREFIX_STRATEGY, "").replace("_", ".")
+        strategyOptions.append(
+            f"[{ALPHABET_LIST_CHAR[counter]}] Red Hat OpenShift® {tmpStrategyString}"
+        )
         counter += 1
-    
+
     terminal_menu = TerminalMenu(
         strategyOptions,
         title="Select an OpenShift strategy:",
         menu_cursor_style=MENU_CURSOR_STYLE,
-        show_search_hint=SHOW_SEARCH_HINT
+        show_search_hint=SHOW_SEARCH_HINT,
     )
     menu_entry_index = terminal_menu.show()
     return strategies[menu_entry_index]
 
+
 def getTechnology(PATH_TEMPLATES: str):
     with open(PATH_TEMPLATES) as f:
         data = yaml.load(f, Loader=yaml.FullLoader)
-        sortedTechnologies = sorted(list(map(lambda x : x['technology'], data)))
+        sortedTechnologies = sorted(list(map(lambda x: x["technology"], data)))
         technologies = buildMenuOptions(sortedTechnologies)
         terminal_menu = TerminalMenu(
             technologies,
             title="Select a technology",
             menu_cursor_style=MENU_CURSOR_STYLE,
-            show_search_hint=SHOW_SEARCH_HINT
+            show_search_hint=SHOW_SEARCH_HINT,
         )
         menu_entry_index = terminal_menu.show()
         return sortedTechnologies[menu_entry_index]
 
+
 def getFramework(PATH_TEMPLATES: str, technology: str):
     with open(PATH_TEMPLATES) as f:
         data = yaml.load(f, Loader=yaml.FullLoader)
-        filteredRecords = list((filter(lambda x: x['technology'] == technology, data)))
-        frameworks = list(map(lambda x : x['id'], filteredRecords))
+        filteredRecords = list((filter(lambda x: x["technology"] == technology, data)))
+        frameworks = list(map(lambda x: x["id"], filteredRecords))
         frameworksOptions = buildMenuOptions(frameworks)
         terminal_menu = TerminalMenu(
             frameworksOptions,
             title="Select a framework",
             menu_cursor_style=MENU_CURSOR_STYLE,
-            show_search_hint=SHOW_SEARCH_HINT
+            show_search_hint=SHOW_SEARCH_HINT,
         )
         menu_entry_index = terminal_menu.show()
-        selectedFramework = next(filter(lambda x : x['id'] == frameworks[menu_entry_index], filteredRecords))
+        selectedFramework = next(
+            filter(lambda x: x["id"] == frameworks[menu_entry_index], filteredRecords)
+        )
 
         return (
-            selectedFramework['id'],
-            selectedFramework['gitRepository'],
-            selectedFramework['profile'],
-            selectedFramework['version']
+            selectedFramework["id"],
+            selectedFramework["gitRepository"],
+            selectedFramework["profile"],
+            selectedFramework["version"],
         )
+
 
 def confirmSelection():
     options = ["[a] Yes", "[b] No"]
-    terminal_menu = TerminalMenu(options, title="Do you want to confirm project initialization?")
+    terminal_menu = TerminalMenu(
+        options, title="Do you want to confirm project initialization?"
+    )
     menu_entry_index = terminal_menu.show()
     if menu_entry_index == 1:
         return scaffold()
 
+
 def cleanWorkspace(sessionUuid: str):
-    shutil.rmtree(f'/tmp/{sessionUuid}', ignore_errors=True)
+    shutil.rmtree(f"/tmp/{sessionUuid}", ignore_errors=True)
+
 
 def getPrompt(promptText: str):
     return input(f"{promptText}")
-    
+
 
 def scaffold():
     scaffoldConfig = {}
-    sessionUuid = uuid.uuid4().hex    
-    scaffoldConfig['strategySelected'] = getStrategyVersions(sessionUuid)
-    
-    PATH_TEMPLATES = f'/tmp/{sessionUuid}/templates/latest.yml'
+    sessionUuid = uuid.uuid4().hex
+    scaffoldConfig["strategySelected"] = getStrategyVersions(sessionUuid)
+
+    PATH_TEMPLATES = f"/tmp/{sessionUuid}/templates/latest.yml"
     technologySelected = getTechnology(PATH_TEMPLATES)
-    scaffoldConfig['technology'] = technologySelected
+    scaffoldConfig["technology"] = technologySelected
 
-    frameworkId, templateUri, profile, version = getFramework(PATH_TEMPLATES, technologySelected)
-    scaffoldConfig['frameworkId'] = frameworkId
-    scaffoldConfig['templateUri'] = templateUri
-    scaffoldConfig['profile'] = profile
-    scaffoldConfig['version'] = version
+    frameworkId, templateUri, profile, version = getFramework(
+        PATH_TEMPLATES, technologySelected
+    )
+    scaffoldConfig["frameworkId"] = frameworkId
+    scaffoldConfig["templateUri"] = templateUri
+    scaffoldConfig["profile"] = profile
+    scaffoldConfig["version"] = version
 
-    projectName = ''
+    projectName = ""
     while not projectName or len(projectName) == 0:
         # TODO: or project already exist
-        projectName = getPrompt('Select a project name: ')
-    scaffoldConfig['projectName'] = projectName
+        projectName = getPrompt("Select a project name: ")
+    scaffoldConfig["projectName"] = projectName
 
     confirmSelection()
 
@@ -113,6 +127,6 @@ def scaffold():
     Repo.clone_from(f"{scaffoldConfig['templateUri']}", PATH_PROJECT)
     # TODO: get SHA from head
 
-    shutil.rmtree(f'{PATH_PROJECT}/.git', ignore_errors=True)
+    shutil.rmtree(f"{PATH_PROJECT}/.git", ignore_errors=True)
 
     cleanWorkspace(sessionUuid)

@@ -1,6 +1,7 @@
 from string import ascii_lowercase
 from ..constants import ALPHABET_LIST_CHAR
 
+
 def buildMenuOptions(arr):
     counter = 0
     options = []
