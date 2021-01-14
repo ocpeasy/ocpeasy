@@ -6,6 +6,9 @@ install:
 	$(POETRY_BIN) config -vvv virtualenvs.create false \
 	&& $(POETRY_BIN) install
 
+config_precommit:
+	$(POETRY_BIN) run pre-commit install
+
 scaffold:
 	$(POETRY_BIN) run python3 cli.py scaffold
 
