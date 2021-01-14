@@ -2,6 +2,7 @@ POETRY_BIN:=~/.poetry/bin/poetry
 # https://lintlyci.github.io/Flake8Rules
 FLAKE8_RULES:= E123,W503
 SOURCE_PATH:=src
+COVERAGE_REPORT:=html
 
 install:
 	$(POETRY_BIN) config -vvv virtualenvs.create false \
@@ -20,4 +21,7 @@ format:
 	$(POETRY_BIN) run black $(SOURCE_PATH)
 
 test:
-	$(POETRY_BIN) run pytest $(SOURCE_PATH)
+	$(POETRY_BIN) run pytest --cov=$(SOURCE_PATH)
+
+test_html_report:
+	$(POETRY_BIN) run pytest --cov=$(SOURCE_PATH) --cov-report html
