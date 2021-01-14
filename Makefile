@@ -7,10 +7,10 @@ install:
 	&& $(POETRY_BIN) install
 
 scaffold:
-	$(POETRY_BIN) run python3 $(SOURCE_PATH)/cli.py scaffold
+	$(POETRY_BIN) run python3 cli.py scaffold
 
 lint:
-	$(POETRY_BIN) run flake8 --select E123,W503 $(SOURCE_PATH)/* -v
+	$(POETRY_BIN) run flake8 --select $(FLAKE8_RULES) $(SOURCE_PATH)/* -v
 
 format:
 	$(POETRY_BIN) run black $(SOURCE_PATH)

@@ -1,6 +1,5 @@
-def inc(x):
-    return x + 1
+from . import buildMenuOptions
 
 
-def test_answer():
-    assert inc(3) == 4
+def test_buildMenuOptions():
+    assert buildMenuOptions(["A", "B"]) == ["[a] A", "[b] B"]

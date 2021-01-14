@@ -14,7 +14,6 @@ from .constants import (
     SHOW_SEARCH_HINT,
 )
 
-
 def getStrategyVersions(sessionUuid: str):
     PATH_SESSION = f"/tmp/{sessionUuid}"
     Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION)
@@ -23,15 +22,13 @@ def getStrategyVersions(sessionUuid: str):
     strategyOptions = []
     counter = 0
 
-    for el in strategies:
-        tmpStrategyString = el.replace(PREFIX_STRATEGY, "").replace("_", ".")
-        strategyOptions.append(
-            f"[{ALPHABET_LIST_CHAR[counter]}] Red Hat OpenShift® {tmpStrategyString}"
-        )
-        counter += 1
+    strategiesOptions = [
+        f'Red Hat OpenShift® {el.replace(PREFIX_STRATEGY, "").replace("_", ".")}'
+        for el in strategies
+    ]
 
     terminal_menu = TerminalMenu(
-        strategyOptions,
+        buildMenuOptions(strategiesOptions),
         title="Select an OpenShift strategy:",
         menu_cursor_style=MENU_CURSOR_STYLE,
         show_search_hint=SHOW_SEARCH_HINT,
@@ -47,7 +44,7 @@ def getTechnology(PATH_TEMPLATES: str):
         technologies = buildMenuOptions(sortedTechnologies)
         terminal_menu = TerminalMenu(
             technologies,
-            title="Select a technology",
+            title="Select a technology:",
             menu_cursor_style=MENU_CURSOR_STYLE,
             show_search_hint=SHOW_SEARCH_HINT,
         )
@@ -63,7 +60,7 @@ def getFramework(PATH_TEMPLATES: str, technology: str):
         frameworksOptions = buildMenuOptions(frameworks)
         terminal_menu = TerminalMenu(
             frameworksOptions,
-            title="Select a framework",
+            title="Select a framework:",
             menu_cursor_style=MENU_CURSOR_STYLE,
             show_search_hint=SHOW_SEARCH_HINT,
         )
