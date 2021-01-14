@@ -6,13 +6,21 @@
 
 OCPeasy consists in a CLI to facilitate the deployment of OpenShift applications, generating the configuration based on your project requirements.
 
-## Installation
+## Pre-requisites (Development)
 
 Poetry is required to use locally the CLI.
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
+
+## Get started (WIP)
+
+### Prerequisites:
+
+- `oc`
+- `curl`
+- `(Windows 10 only) WSL installed`
 
 ### Appendix
 
