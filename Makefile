@@ -1,4 +1,5 @@
 POETRY_BIN:=~/.poetry/bin/poetry
+# https://lintlyci.github.io/Flake8Rules
 FLAKE8_RULES:= E123,W503
 SOURCE_PATH:=src
 
