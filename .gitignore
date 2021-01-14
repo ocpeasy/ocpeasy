@@ -142,3 +142,5 @@ cython_debug/
 
 cov_*
 cov.xml
+
+.DS_Store
