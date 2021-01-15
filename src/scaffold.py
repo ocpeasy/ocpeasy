@@ -120,7 +120,7 @@ def getOpenshiftRepositoryMetadata():
 def scaffold():
     scaffoldConfig = {}
     sessionUuid = uuid.uuid4().hex
-    scaffoldConfig["strategySelected"] = getStrategyVersions(sessionUuid)
+    scaffoldConfig["strategy"] = getStrategyVersions(sessionUuid)
 
     PATH_TEMPLATES = f"/tmp/{sessionUuid}/templates/latest.yml"
     technologySelected = getTechnology(PATH_TEMPLATES)
@@ -153,18 +153,15 @@ def scaffold():
     ) = getOpenshiftRepositoryMetadata()
 
     ocpeasyConfig = {
-        "ocpStrategy": scaffoldConfig["strategySelected"],
-        # SHA template
-        "ocpProject": scaffoldConfig["projectName"],
         "containerRouter": containerRoute,
         "containerId": containerId,
         "gitRepository": gitRepository,
         "gitCredentialsId": gitCredentialsId,
         "podReplicas": podReplicas,
+        "templateMeta": {**scaffoldConfig}
+        # TODO: add SHA template
     }
 
-    # TODO: dump ocpeasyConfig into PATH_PROJECT folder
-    yaml.dump(ocpeasyConfig)
     with open(f"{PATH_PROJECT}/{OCPEASY_CONFIG_NAME}", "w") as f:
         yaml.dump(ocpeasyConfig, f)
 
