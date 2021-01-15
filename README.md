@@ -22,7 +22,7 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 
 ### Prerequisites:
 
-- `oc`
+- `oc` corresponding to the version used by OpenShift server (https://docs.openshift.com/container-platform/4.1/release_notes/versioning-policy.html)
 - `curl`
 - `(Windows 10 only) WSL installed`
 
