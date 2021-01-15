@@ -4,29 +4,27 @@ import shutil
 from os import walk
 from simple_term_menu import TerminalMenu
 import yaml
-from .utils import buildMenuOptions
+from .utils import buildMenuOptions, getPrompt
 
 from .constants import (
     BASE_STRATEGIES_REPOSITORY,
-    ALPHABET_LIST_CHAR,
     MENU_CURSOR_STYLE,
     PREFIX_STRATEGY,
     SHOW_SEARCH_HINT,
+    OCPEASY_CONFIG_NAME,
+    PLATFORM_LABEL,
 )
+
 
 def getStrategyVersions(sessionUuid: str):
     PATH_SESSION = f"/tmp/{sessionUuid}"
     Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION)
     _, folders, _ = next(walk(PATH_SESSION))
     strategies = list(filter(lambda x: x.startswith(PREFIX_STRATEGY), folders))
-    strategyOptions = []
-    counter = 0
-
     strategiesOptions = [
-        f'Red Hat OpenShift® {el.replace(PREFIX_STRATEGY, "").replace("_", ".")}'
+        f'{PLATFORM_LABEL} {el.replace(PREFIX_STRATEGY, "").replace("_", ".")}'
         for el in strategies
     ]
-
     terminal_menu = TerminalMenu(
         buildMenuOptions(strategiesOptions),
         title="Select an OpenShift strategy:",
@@ -55,7 +53,9 @@ def getTechnology(PATH_TEMPLATES: str):
 def getFramework(PATH_TEMPLATES: str, technology: str):
     with open(PATH_TEMPLATES) as f:
         data = yaml.load(f, Loader=yaml.FullLoader)
-        filteredRecords = list((filter(lambda x: x["technology"] == technology, data)))
+        filteredRecords = list(
+            (filter(lambda x: x["technology"] == technology, data))
+        )  # noqa: E501
         frameworks = list(map(lambda x: x["id"], filteredRecords))
         frameworksOptions = buildMenuOptions(frameworks)
         terminal_menu = TerminalMenu(
@@ -64,10 +64,10 @@ def getFramework(PATH_TEMPLATES: str, technology: str):
             menu_cursor_style=MENU_CURSOR_STYLE,
             show_search_hint=SHOW_SEARCH_HINT,
         )
-        menu_entry_index = terminal_menu.show()
+        idx = terminal_menu.show()
         selectedFramework = next(
-            filter(lambda x: x["id"] == frameworks[menu_entry_index], filteredRecords)
-        )
+            filter(lambda x: x["id"] == frameworks[idx], filteredRecords)
+        )  # noqa: E501
 
         return (
             selectedFramework["id"],
@@ -81,18 +81,40 @@ def confirmSelection():
     options = ["[a] Yes", "[b] No"]
     terminal_menu = TerminalMenu(
         options, title="Do you want to confirm project initialization?"
-    )
+    )  # noqa: E501
     menu_entry_index = terminal_menu.show()
-    if menu_entry_index == 1:
-        return scaffold()
+    return scaffold() if menu_entry_index == 1 else True
 
 
 def cleanWorkspace(sessionUuid: str):
     shutil.rmtree(f"/tmp/{sessionUuid}", ignore_errors=True)
 
 
-def getPrompt(promptText: str):
-    return input(f"{promptText}")
+def getOpenshiftRepositoryMetadata():
+    # input containerId
+    containerId = getPrompt("Type your OpenShift container ID:")
+    # application route
+    # default novartis: testpython-dedrr.statwb.eu.novartis.net
+    containerRoute = getPrompt(
+        "Type your route:", f"{containerId}-<project>.<host>"
+    )  # noqa: E501
+    # input gitRepository
+    gitRepository = getPrompt(
+        f"Where will reside your code?", "https://www.github.com/user/repo.git"
+    )
+    # input gitCredentialsId
+    gitCredentialsId = getPrompt(
+        f"What's the git credential ID?", "gogs-repo-pw"
+    )  # noqa: E501
+    # input number of replica
+    podReplicas = getPrompt(f"How many PoD/replicas for this app?", "2")
+    return (
+        containerId,
+        containerRoute,
+        gitRepository,
+        gitCredentialsId,
+        podReplicas,
+    )  # noqa: E501
 
 
 def scaffold():
@@ -112,11 +134,7 @@ def scaffold():
     scaffoldConfig["profile"] = profile
     scaffoldConfig["version"] = version
 
-    projectName = ""
-    while not projectName or len(projectName) == 0:
-        # TODO: or project already exist
-        projectName = getPrompt("Select a project name: ")
-    scaffoldConfig["projectName"] = projectName
+    scaffoldConfig["projectName"] = getPrompt("Select a project name: ")
 
     confirmSelection()
 
@@ -125,5 +143,29 @@ def scaffold():
     # TODO: get SHA from head
 
     shutil.rmtree(f"{PATH_PROJECT}/.git", ignore_errors=True)
+
+    (
+        containerId,
+        containerRoute,
+        gitRepository,
+        gitCredentialsId,
+        podReplicas,
+    ) = getOpenshiftRepositoryMetadata()
+
+    ocpeasyConfig = {
+        "ocpStrategy": scaffoldConfig["strategySelected"],
+        # SHA template
+        "ocpProject": scaffoldConfig["projectName"],
+        "containerRouter": containerRoute,
+        "containerId": containerId,
+        "gitRepository": gitRepository,
+        "gitCredentialsId": gitCredentialsId,
+        "podReplicas": podReplicas,
+    }
+
+    # TODO: dump ocpeasyConfig into PATH_PROJECT folder
+    yaml.dump(ocpeasyConfig)
+    with open(f"{PATH_PROJECT}/{OCPEASY_CONFIG_NAME}", "w") as f:
+        yaml.dump(ocpeasyConfig, f)
 
     cleanWorkspace(sessionUuid)
