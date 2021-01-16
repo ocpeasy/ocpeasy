@@ -4,7 +4,7 @@ import shutil
 from os import walk
 from simple_term_menu import TerminalMenu
 import yaml
-from .utils import buildMenuOptions, getPrompt
+from .utils import buildMenuOptions, getPrompt, removeTrailSlash
 
 from .constants import (
     BASE_STRATEGIES_REPOSITORY,
@@ -132,9 +132,17 @@ def scaffold():
 
     scaffoldConfig["projectName"] = getPrompt("Select a project name:")
 
+    # configure path project
+    relativeProjectPath = getPrompt(
+        "Where do you want to generate your project (local)?"
+    )
+
     confirmSelection()
 
-    PATH_PROJECT = f"/tmp/{scaffoldConfig['projectName']}"
+    PATH_PROJECT = (
+        f"{removeTrailSlash(relativeProjectPath)}/{scaffoldConfig['projectName']}"
+    )
+    # PATH_PROJECT = f"/tmp/{scaffoldConfig['projectName']}"
     Repo.clone_from(f"{scaffoldConfig['templateUri']}", PATH_PROJECT)
     # TODO: get SHA from head
 

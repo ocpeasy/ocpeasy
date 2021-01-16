@@ -1,4 +1,4 @@
-from .utils import buildMenuOptions, getPrompt
+from .utils import buildMenuOptions, getPrompt, removeTrailSlash
 
 
 def test_buildMenuOptions():
@@ -14,3 +14,9 @@ def test_getPrompt(mocker):
 
     mocker.patch("builtins.input", return_value="")
     assert getPrompt("dummy prompt text", "default_value") == "default_value"
+
+
+def test_removeTrailSlash():
+    assert removeTrailSlash("/a/b/") == "/a/b"
+    assert removeTrailSlash("a/b/") == "a/b"
+    assert removeTrailSlash("/a/b") == "/a/b"

@@ -10,6 +10,12 @@ repos:
     - id: flake8
 -   repo: local
     hooks:
+    - id: tests
+      name: run-tests
+      entry: make test
+      language: system
+-   repo: local
+    hooks:
     - id: coverage-badge
       name: generate_coverage_badge
       entry: make generate_coverage_badge

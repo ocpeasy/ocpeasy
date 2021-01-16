@@ -19,3 +19,9 @@ def getPrompt(promptText: str, default=None, rule=None):
         if len(value) == 0 and default:
             value = default
     return value
+
+
+def removeTrailSlash(uri: str):
+    if uri.endswith("/"):
+        uri = uri[:-1]
+    return uri
