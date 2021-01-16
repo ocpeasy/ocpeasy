@@ -8,23 +8,23 @@ OCPeasy consists in a CLI to facilitate the deployment of OpenShift applications
 
 ## Pre-requisites (Development)
 
-- Poetry is required to use locally the CLI.
+- Poetry is required to develop and test locally the CLI.
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
 
-- pre-commit configured (once installed)
+- pre-commit is required to ensure linting (with flake8) and formatting (with black) are applied before each commit
 
 `make config_precommit`
 
-## Get started (WIP)
+## Get started
 
 ### Prerequisites:
 
 - `oc` corresponding to the version used by OpenShift server (https://docs.openshift.com/container-platform/4.1/release_notes/versioning-policy.html)
-- `curl`
-- `(Windows 10 only) WSL installed`
+<!-- - `curl`
+- `(Windows 10 only) WSL installed` -->
 
 ### Appendix
 
@@ -36,10 +36,10 @@ I added the following to my `.zshrc`
 
 ## Roadmap
 
-- Configuring Tests/Linting
-- Generate Project yaml `ocpeasy.yml`
-- Generate Stage yaml `<stage>.yml`
-- Support SSH Keys for cloning (read: https://stackoverflow.com/questions/28291909/gitpython-and-ssh-keys)
+- [x] Configuring Tests/Linting
+- [x] Generate Project yaml `ocpeasy.yml`
+- [ ] Generate Stage yaml `<stage>.yml`
+- [ ] Support SSH Keys for cloning (read: https://stackoverflow.com/questions/28291909/gitpython-and-ssh-keys)
 
 ## Examples
 
