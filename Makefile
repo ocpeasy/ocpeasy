@@ -27,3 +27,6 @@ test:
 
 test_html_report:
 	$(POETRY_BIN) run pytest --cov=$(SOURCE_PATH) --cov-report html
+
+generate_coverage_badge:
+	$(POETRY_BIN) run coverage-badge -o badges/coverage.svg
