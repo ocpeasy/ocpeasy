@@ -15,7 +15,7 @@ scaffold:
 	$(POETRY_BIN) run python3 $(SOURCE_PATH) scaffold
 
 buildStageDev:
-	export POETRY_DEV_PATH=/Users/home/david/ocpeasy-test && $(POETRY_BIN) run python3 $(SOURCE_PATH) buildStage --stageId=dev
+	export POETRY_DEV_PATH=/Users/david/ocpeasy-test && $(POETRY_BIN) run python3 $(SOURCE_PATH) buildStage --stageId=dev
 
 buildStageProd:
 	$(POETRY_BIN) run python3 $(SOURCE_PATH) buildStage --stageId=prod
