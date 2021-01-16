@@ -102,7 +102,7 @@ def getOpenshiftRepositoryMetadata(projectName: str):
     gitCredentialsId = getPrompt(
         f"What's the git credential ID?", "gogs-repo-pw"
     )  # noqa: E501
-    podReplicas = getPrompt(f"How many PoD/replicas for this app?", str(2))
+    podReplicas = int(getPrompt(f"How many PoD/replicas for this app?", str(2)))
     return (
         containerId,
         containerRoute,
@@ -129,7 +129,7 @@ def scaffold():
     scaffoldConfig["profile"] = profile
     scaffoldConfig["version"] = version
 
-    scaffoldConfig["projectName"] = getPrompt("Select a project name: ")
+    scaffoldConfig["projectName"] = getPrompt("Select a project name:")
 
     confirmSelection()
 

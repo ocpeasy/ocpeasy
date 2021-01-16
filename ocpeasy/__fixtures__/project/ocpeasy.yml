@@ -1,12 +1,12 @@
-containerId: hello
-containerRouter: hello-<project>.<host>
+containerId: pythonapp
+containerRouter: pythonapp-projecttest.<host>
 gitCredentialsId: gogs-repo-pw
 gitRepository: https://www.github.com/user/repo.git
-podReplicas: '2'
+podReplicas: 2
 templateMeta:
   frameworkId: python-flask
   profile: defaultApp
-  projectName: rrrr
+  projectName: projecttest
   strategy: openshift_3_4
   technology: python3.8
   templateUri: https://github.com/ocpeasy/ocpeasy-template-python-flask.git
