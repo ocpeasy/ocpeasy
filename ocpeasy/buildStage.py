@@ -1,5 +1,6 @@
 from os import path, getenv
 from .utils import removeTrailSlash
+from .constants import OCPEASY_CONFIG_NAME
 
 
 def buildStage(stageId: str):
@@ -7,9 +8,10 @@ def buildStage(stageId: str):
     pathProject = "." if not projectPath else projectPath
 
     ocpPeasyConfigFound = False
+    ocpPeasyConfigPath = f"{removeTrailSlash(pathProject)}/{OCPEASY_CONFIG_NAME}"
 
     # TODO: check if ocpeasy.yml file exists
-    if path.isfile(f"{removeTrailSlash(pathProject)}/ocpeasy.yml"):
+    if path.isfile(ocpPeasyConfigPath):
         ocpPeasyConfigFound = True
     else:
         print("ocpeasy.yml file does not exist")
