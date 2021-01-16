@@ -14,9 +14,9 @@ repos:
       name: run-tests
       entry: make test
       language: system
--   repo: local
-    hooks:
-    - id: coverage-badge
-      name: generate_coverage_badge
-      entry: make generate_coverage_badge
-      language: system
+# -   repo: local
+#     hooks:
+#     - id: coverage-badge
+#       name: generate_coverage_badge
+#       entry: make generate_coverage_badge
+#       language: system
