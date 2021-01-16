@@ -14,7 +14,7 @@ import yaml
 import shutil
 
 
-def buildStage(stageId: str):
+def createStage(stageId: str):
     projectEnvPath = getenv("POETRY_DEV_PATH", None)
     pathProject = "." if not projectEnvPath else removeTrailSlash(projectEnvPath)
 
@@ -51,32 +51,41 @@ def buildStage(stageId: str):
                 shutil.rmtree(OCPEASY_DEPLOYMENT_PATH, ignore_errors=True)
                 mkdir(OCPEASY_DEPLOYMENT_PATH)
 
-                stageConfiguration = {}
+                stageConfiguration = tokenConfiguration = {}
 
                 # TODO: check stageId doesnt exist
                 # get stageId
-                # get openshift project name (ocpProjectName)
+                # get openshift project name (ocpProject)
                 # get openshift container id (containerId)
                 # configure openshift route (openshiftRoute)
                 stageId = getPrompt(
                     f"What's the id of your stage (default: development)", "development"
                 )
-                ocpProjectName = getPrompt(f"What's the name of the OpenShift project")
+                ocpProject = getPrompt(f"What's the name of the OpenShift project")
                 containerId = getPrompt(
                     f"What's the OpenShift container ID/Name (unique per project)"
                 )
                 containerRouter = getPrompt(
-                    f"What's the route of your application? (http(?s)://{containerId}-{ocpProjectName}.<hostOcp>)"
+                    f"What's the route of your application? (http(?s)://{containerId}-{ocpProject}.<hostOcp>)"
                 )
                 podReplicas = getPrompt(
                     f"What's the number of replicas required for your app?"
                 )
 
                 stageConfiguration["stageId"] = stageId
-                stageConfiguration["ocpProjectName"] = ocpProjectName
+                stageConfiguration["ocpProject"] = ocpProject
                 stageConfiguration["containerId"] = containerId
                 stageConfiguration["containerRouter"] = containerRouter
                 stageConfiguration["podReplicas"] = podReplicas
+
+                tokenConfiguration["ocpProject"] = ocpProject
+                tokenConfiguration["containerId"] = containerId
+                tokenConfiguration["containerRouter"] = containerRouter
+                tokenConfiguration["podReplicas"] = podReplicas
+
+                # TODO: get from config deployment
+                tokenConfiguration["gitRepository"] = ""
+                tokenConfiguration["gitCredentialsId"] = ""
 
                 print(stageConfiguration)
                 # TODO: append stage configuration to ocpeasy.yml

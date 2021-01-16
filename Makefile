@@ -14,11 +14,8 @@ config_precommit:
 scaffold:
 	$(POETRY_BIN) run python3 $(SOURCE_PATH) scaffold
 
-buildStageDev:
-	export POETRY_DEV_PATH=/Users/david/ocpeasy-test && $(POETRY_BIN) run python3 $(SOURCE_PATH) buildStage --stageId=dev
-
-buildStageProd:
-	$(POETRY_BIN) run python3 $(SOURCE_PATH) buildStage --stageId=prod
+create_stage:
+	export POETRY_DEV_PATH=/Users/david/ocpeasy-test && $(POETRY_BIN) run python3 $(SOURCE_PATH) createStage
 
 lint:
 	$(POETRY_BIN) run flake8 --select $(FLAKE8_RULES) $(SOURCE_PATH)/* -v
