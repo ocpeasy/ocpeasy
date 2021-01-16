@@ -1,4 +1,4 @@
-from .constants import ALPHABET_LIST_CHAR
+from .constants import ALPHABET_LIST_CHAR, EMPTY_STRING
 
 
 def buildMenuOptions(arr):
@@ -14,7 +14,7 @@ def getPrompt(promptText: str, default=None, rule=None):
     value = ""
     while len(value) == 0:
         value = input(
-            f"{promptText} {f'(default: {default})' if default != None else ''}"  # noqa: E501
+            f"{promptText} {f'(default: {default})' if default != None else EMPTY_STRING}"  # noqa: E501
         )
         if len(value) == 0 and default:
             value = default

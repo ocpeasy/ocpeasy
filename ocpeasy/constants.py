@@ -17,3 +17,5 @@ MENU_CURSOR_STYLE = ("fg_green", "bold")
 SHOW_SEARCH_HINT = True
 
 OCPEASY_CONFIG_NAME = "ocpeasy.yml"
+# MISC
+EMPTY_STRING = ""
