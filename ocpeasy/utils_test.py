@@ -11,3 +11,6 @@ def test_getPrompt(mocker):
 
     mocker.patch("builtins.input", return_value="9b4db9b9-2b16-4347")
     assert getPrompt("dummy prompt text") == "9b4db9b9-2b16-4347"
+
+    mocker.patch("builtins.input", return_value="")
+    assert getPrompt("dummy prompt text", "default_value") == "default_value"
