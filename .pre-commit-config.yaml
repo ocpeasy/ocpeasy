@@ -8,3 +8,6 @@ repos:
     rev: 3.7.9
     hooks:
     - id: flake8
+entry: make generate_coverage_badge
+language: system
+verbose: true
