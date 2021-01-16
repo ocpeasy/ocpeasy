@@ -2,6 +2,7 @@ POETRY_BIN:=~/.poetry/bin/poetry
 # https://lintlyci.github.io/Flake8Rules
 FLAKE8_RULES:= E123,W503
 SOURCE_PATH:=ocpeasy
+COVERAGE_BADGE_PATH:=badges/coverage.svg
 
 install:
 	$(POETRY_BIN) config -vvv virtualenvs.create false \
@@ -29,4 +30,4 @@ test_html_report:
 	$(POETRY_BIN) run pytest --cov=$(SOURCE_PATH) --cov-report html
 
 generate_coverage_badge:
-	$(POETRY_BIN) run coverage-badge -o badges/coverage.svg
+	rm -rf $(COVERAGE_BADGE_PATH) && $(POETRY_BIN) run coverage-badge -o $(COVERAGE_BADGE_PATH)
