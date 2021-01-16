@@ -90,13 +90,13 @@ def cleanWorkspace(sessionUuid: str):
     shutil.rmtree(f"/tmp/{sessionUuid}", ignore_errors=True)
 
 
-def getOpenshiftRepositoryMetadata():
+def getOpenshiftRepositoryMetadata(projectName: str):
     # input containerId
     containerId = getPrompt("Type your OpenShift container ID:")
     # application route
     # default novartis: testpython-dedrr.statwb.eu.novartis.net
     containerRoute = getPrompt(
-        "Type your route:", f"{containerId}-<project>.<host>"
+        "Type your route:", f"{containerId}-{projectName}.<host>"
     )  # noqa: E501
     # input gitRepository
     gitRepository = getPrompt(
@@ -150,7 +150,7 @@ def scaffold():
         gitRepository,
         gitCredentialsId,
         podReplicas,
-    ) = getOpenshiftRepositoryMetadata()
+    ) = getOpenshiftRepositoryMetadata(scaffoldConfig["projectName"])
 
     ocpeasyConfig = {
         "containerRouter": containerRoute,
