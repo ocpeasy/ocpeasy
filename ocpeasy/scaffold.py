@@ -91,6 +91,7 @@ def cleanWorkspace(sessionUuid: str):
 
 
 def getOpenshiftRepositoryMetadata(projectName: str):
+    # TODO: add rule to prevent camelcase and special characters
     containerId = getPrompt("Type your OpenShift container ID:")
     # default novartis: testpython-dedrr.statwb.eu.novartis.net
     containerRoute = getPrompt(
@@ -147,13 +148,17 @@ def scaffold():
         podReplicas,
     ) = getOpenshiftRepositoryMetadata(scaffoldConfig["projectName"])
 
+    templateMeta = dict(scaffoldConfig)
+    del templateMeta["projectName"]
+
     ocpeasyConfig = {
         "containerRouter": containerRoute,
+        "projectName": scaffoldConfig["projectName"],
         "containerId": containerId,
         "gitRepository": gitRepository,
         "gitCredentialsId": gitCredentialsId,
         "podReplicas": podReplicas,
-        "templateMeta": {**scaffoldConfig}
+        "templateMeta": {**templateMeta}
         # TODO: add SHA template
     }
 
