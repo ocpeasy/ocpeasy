@@ -16,6 +16,7 @@ ALPHABET_LIST_CHAR = list(ascii_lowercase)
 MENU_CURSOR_STYLE = ("fg_green", "bold")
 SHOW_SEARCH_HINT = True
 
-OCPEASY_CONFIG_NAME = "ocpeasy.yml"
+OCPEASY_CONFIG_NAME = f"{CLI_NAME}.yml"
+OCPEASY_CONTEXT_PATH = f".{CLI_NAME}"
 # MISC
 EMPTY_STRING = ""

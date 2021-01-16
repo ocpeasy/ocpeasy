@@ -160,7 +160,7 @@ def scaffold():
     del templateMeta["projectName"]
 
     ocpeasyConfig = {
-        "containerRouter": containerRoute,
+        "containerRoute": containerRoute,
         "projectName": scaffoldConfig["projectName"],
         "containerId": containerId,
         "gitRepository": gitRepository,
