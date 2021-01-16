@@ -1,10 +1,14 @@
 from git import Repo
-import uuid
-import shutil
 from os import walk
 from simple_term_menu import TerminalMenu
 import yaml
-from .utils import buildMenuOptions, getPrompt, removeTrailSlash
+from .utils import (
+    buildMenuOptions,
+    getPrompt,
+    removeTrailSlash,
+    createNewSessionId,
+    cleanWorkspace,
+)
 
 from .constants import (
     BASE_STRATEGIES_REPOSITORY,
@@ -14,6 +18,8 @@ from .constants import (
     OCPEASY_CONFIG_NAME,
     PLATFORM_LABEL,
 )
+
+import shutil
 
 
 def getStrategyVersions(sessionUuid: str):
@@ -86,10 +92,6 @@ def confirmSelection():
     return scaffold() if menu_entry_index == 1 else True
 
 
-def cleanWorkspace(sessionUuid: str):
-    shutil.rmtree(f"/tmp/{sessionUuid}", ignore_errors=True)
-
-
 def getOpenshiftRepositoryMetadata(projectName: str):
     # TODO: add rule to prevent camelcase and special characters
     containerId = getPrompt("Type your OpenShift container ID:")
@@ -115,7 +117,7 @@ def getOpenshiftRepositoryMetadata(projectName: str):
 
 def scaffold():
     scaffoldConfig = {}
-    sessionUuid = uuid.uuid4().hex
+    sessionUuid = createNewSessionId()
     scaffoldConfig["strategy"] = getStrategyVersions(sessionUuid)
 
     PATH_TEMPLATES = f"/tmp/{sessionUuid}/templates/latest.yml"

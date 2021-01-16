@@ -1,4 +1,10 @@
-from .utils import buildMenuOptions, getPrompt, removeTrailSlash
+from .utils import (
+    buildMenuOptions,
+    getPrompt,
+    removeTrailSlash,
+    createNewSessionId,
+    cloneStrategyRepository,
+)
 
 
 def test_buildMenuOptions():
@@ -20,3 +26,12 @@ def test_removeTrailSlash():
     assert removeTrailSlash("/a/b/") == "/a/b"
     assert removeTrailSlash("a/b/") == "a/b"
     assert removeTrailSlash("/a/b") == "/a/b"
+
+
+def test_createNewSessionId():
+    assert len(createNewSessionId()) > 0
+
+
+def test_cloneStrategyRepository():
+    sessionUuid = createNewSessionId()
+    cloneStrategyRepository(sessionUuid)

@@ -1,4 +1,12 @@
-from .constants import ALPHABET_LIST_CHAR, EMPTY_STRING
+from .constants import ALPHABET_LIST_CHAR, EMPTY_STRING, BASE_STRATEGIES_REPOSITORY
+
+from uuid import uuid4
+from git import Repo
+import shutil
+
+
+def createNewSessionId():
+    return uuid4().hex
 
 
 def buildMenuOptions(arr):
@@ -25,3 +33,12 @@ def removeTrailSlash(uri: str):
     if uri.endswith("/"):
         uri = uri[:-1]
     return uri
+
+
+def cloneStrategyRepository(sessionId):
+    PATH_SESSION = f"/tmp/{sessionId}"
+    Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION)
+
+
+def cleanWorkspace(sessionId: str):
+    shutil.rmtree(f"/tmp/{sessionId}", ignore_errors=True)
