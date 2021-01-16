@@ -31,3 +31,9 @@ test_html_report:
 
 generate_coverage_badge:
 	rm -rf $(COVERAGE_BADGE_PATH) && $(POETRY_BIN) run coverage-badge -o $(COVERAGE_BADGE_PATH)
+
+build:
+	$(POETRY_BIN) build
+
+publish:
+	$(POETRY_BIN) publish
