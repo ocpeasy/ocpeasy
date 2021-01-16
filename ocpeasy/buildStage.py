@@ -1,2 +1,8 @@
+import os
+
+
 def buildStage(stageId: str):
-    return f"buildStage {stageId}"
+    devPath = os.getenv("POETRY_DEV_PATH", None)
+    pathProject = "." if not devPath else devPath
+
+    print(f"buildStage {stageId} {pathProject}")
