@@ -1,4 +1,4 @@
-from ..constants import ALPHABET_LIST_CHAR
+from .constants import ALPHABET_LIST_CHAR
 
 
 def buildMenuOptions(arr):

@@ -1,4 +1,4 @@
-from . import buildMenuOptions, getPrompt
+from .utils import buildMenuOptions, getPrompt
 
 
 def test_buildMenuOptions():
