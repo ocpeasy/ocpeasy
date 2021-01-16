@@ -94,24 +94,25 @@ def confirmSelection():
 
 def getOpenshiftRepositoryMetadata(projectName: str):
     # TODO: add rule to prevent camelcase and special characters
-    containerId = getPrompt("Type your OpenShift container ID:")
-    # default novartis: testpython-dedrr.statwb.eu.novartis.net
-    containerRoute = getPrompt(
-        "Type your route:", f"{containerId}-{projectName}.<host>"
-    )  # noqa: E501
+    # TODO: get those parameters in the stage generation
+    # containerId = getPrompt("Type your OpenShift container ID:")
+    # # default novartis: testpython-dedrr.statwb.eu.novartis.net
+    # containerRoute = getPrompt(
+    #     "Type your route:", f"{containerId}-{projectName}.<host>"
+    # )  # noqa: E501
     gitRepository = getPrompt(
         f"Where will reside your code?", "https://www.github.com/user/repo.git"
     )
     gitCredentialsId = getPrompt(
         f"What's the git credential ID?", "gogs-repo-pw"
     )  # noqa: E501
-    podReplicas = int(getPrompt(f"How many PoD/replicas for this app?", str(2)))
+    # podReplicas = int(getPrompt(f"How many PoD/replicas for this app?", str(2)))
     return (
-        containerId,
-        containerRoute,
+        # containerId,
+        # containerRoute,
         gitRepository,
         gitCredentialsId,
-        podReplicas,
+        # podReplicas,
     )  # noqa: E501
 
 
@@ -162,12 +163,12 @@ def scaffold():
     del templateMeta["projectName"]
 
     ocpeasyConfig = {
-        "containerRoute": containerRoute,
+        # "containerRoute": containerRoute,
         "projectName": scaffoldConfig["projectName"],
-        "containerId": containerId,
+        # "containerId": containerId,
         "gitRepository": gitRepository,
         "gitCredentialsId": gitCredentialsId,
-        "podReplicas": podReplicas,
+        # "podReplicas": podReplicas,
         "templateMeta": {**templateMeta}
         # TODO: add SHA template
     }

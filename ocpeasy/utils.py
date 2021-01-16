@@ -42,3 +42,9 @@ def cloneStrategyRepository(sessionId):
 
 def cleanWorkspace(sessionId: str):
     shutil.rmtree(f"/tmp/{sessionId}", ignore_errors=True)
+
+
+def replaceAll(text: str, dic: dict):
+    for i in dic.keys():
+        text = text.replace(f"{i}", dic.get(i))
+    return text.replace("[", "").replace("]", "")
