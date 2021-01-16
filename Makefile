@@ -2,7 +2,6 @@ POETRY_BIN:=~/.poetry/bin/poetry
 # https://lintlyci.github.io/Flake8Rules
 FLAKE8_RULES:= E123,W503
 SOURCE_PATH:=ocpeasy
-COVERAGE_REPORT:=html
 
 install:
 	$(POETRY_BIN) config -vvv virtualenvs.create false \
@@ -12,7 +11,7 @@ config_precommit:
 	$(POETRY_BIN) run pre-commit install
 
 scaffold:
-	$(POETRY_BIN) run python3 ocpeasy scaffold
+	$(POETRY_BIN) run python3 $(SOURCE_PATH) scaffold
 
 lint:
 	$(POETRY_BIN) run flake8 --select $(FLAKE8_RULES) $(SOURCE_PATH)/* -v

@@ -78,7 +78,7 @@ def getFramework(PATH_TEMPLATES: str, technology: str):
 
 
 def confirmSelection():
-    options = ["[a] Yes", "[b] No"]
+    options = buildMenuOptions(["Yes", "No"])
     terminal_menu = TerminalMenu(
         options, title="Do you want to confirm project initialization?"
     )  # noqa: E501
