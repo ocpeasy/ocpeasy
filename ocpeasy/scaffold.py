@@ -91,23 +91,18 @@ def cleanWorkspace(sessionUuid: str):
 
 
 def getOpenshiftRepositoryMetadata(projectName: str):
-    # input containerId
     containerId = getPrompt("Type your OpenShift container ID:")
-    # application route
     # default novartis: testpython-dedrr.statwb.eu.novartis.net
     containerRoute = getPrompt(
         "Type your route:", f"{containerId}-{projectName}.<host>"
     )  # noqa: E501
-    # input gitRepository
     gitRepository = getPrompt(
         f"Where will reside your code?", "https://www.github.com/user/repo.git"
     )
-    # input gitCredentialsId
     gitCredentialsId = getPrompt(
         f"What's the git credential ID?", "gogs-repo-pw"
     )  # noqa: E501
-    # input number of replica
-    podReplicas = getPrompt(f"How many PoD/replicas for this app?", "2")
+    podReplicas = getPrompt(f"How many PoD/replicas for this app?", str(2))
     return (
         containerId,
         containerRoute,
