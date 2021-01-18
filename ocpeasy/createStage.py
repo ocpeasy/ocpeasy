@@ -104,5 +104,5 @@ def createStage():
             cleanWorkspace(sessionId)
 
     print(
-        f"\n\n -> new OpenShift stage created ({stageId}) for project [{pathProject}] \u2713"
+        f"\n\nnew OpenShift stage created ({stageId}) for project [{pathProject}] \u2713"
     )
