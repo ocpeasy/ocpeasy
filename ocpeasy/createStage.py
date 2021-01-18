@@ -74,10 +74,10 @@ def createStage():
                 tokenConfiguration["containerRouter"] = containerRouter
                 tokenConfiguration["podReplicas"] = podReplicas
                 tokenConfiguration["generatedBy"] = f"{CLI_NAME} CLI ({__version__})"
-
-                # TODO: get from config deployment
-                tokenConfiguration["gitRepository"] = ""
-                tokenConfiguration["gitCredentialsId"] = ""
+                tokenConfiguration["gitRepository"] = globalValues["gitRepository"]
+                tokenConfiguration["gitCredentialsId"] = globalValues[
+                    "gitCredentialsId"
+                ]
 
                 strategyId = deployConfigDict["templateMeta"]["strategy"]
                 OCP_PROFILE_PATH = f"/tmp/{sessionId}/{strategyId}/profiles/{deployConfigDict['templateMeta']['profile']}"

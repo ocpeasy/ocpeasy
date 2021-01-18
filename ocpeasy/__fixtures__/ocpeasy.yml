@@ -1,9 +1,6 @@
-containerId: cm-api
-containerRouter: cm-api-de.statwb.eu.novartis.net
 gitCredentialsId: gogs-repo-pw
 gitRepository: https://www.github.com/user/repo.git
-podReplicas: 3
-projectName: de
+projectName: ocpeasy-test
 templateMeta:
   frameworkId: python-flask
   profile: defaultApp
