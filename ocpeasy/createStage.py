@@ -24,7 +24,8 @@ def createStage():
     if path.isfile(ocpPeasyConfigPath):
         ocpPeasyConfigFound = True
     else:
-        print("ocpeasy.yml file does not exist")
+        print(f"\nocpeasy.yml file does not exist, run `ocpeasy init` first. \u274c")
+        return
 
     if ocpPeasyConfigFound:
         sessionId = createNewSessionId()
