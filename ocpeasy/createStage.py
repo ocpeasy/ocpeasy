@@ -14,7 +14,7 @@ from .__version__ import __version__
 
 
 def createStage():
-    projectEnvPath = getenv("POETRY_DEV_PATH", None)
+    projectEnvPath = getenv("PROJECT_DEV_PATH", None)
     pathProject = "." if not projectEnvPath else removeTrailSlash(projectEnvPath)
 
     # check if ocpeasy config exists
@@ -33,7 +33,7 @@ def createStage():
         with open(ocpPeasyConfigPath) as ocpPeasyConfigFile:
             deployConfigDict = yaml.load(ocpPeasyConfigFile, Loader=yaml.FullLoader)
             globalValues = dict(deployConfigDict)
-            excludedKeys = ["templateMeta"]
+            excludedKeys = ["templateMeta", "stages"]
             for excluded in excludedKeys:
                 del globalValues[excluded]
 
@@ -93,10 +93,11 @@ def createStage():
                         configAsDict = yaml.load(f, Loader=yaml.FullLoader)
                         ocpContextYaml = yaml.dump(configAsDict)
                         ocpContextBuild = replaceAll(ocpContextYaml, tokenConfiguration)
-                        # generate yaml files in .ocpeasy/stage/{configFile}
+                        # generate yaml files in .ocpeasy/{stage}/{configFile}
                         stageConfigFile = f"{STAGE_CONFIG_ROOT}/{configFile}"
                         with open(stageConfigFile, "w") as configTarget:
                             configTarget.write(ocpContextBuild)
+                # append the stage to the ocpeasy.yml file
 
             except OSError:
                 print("Creation of the directory %s failed" % OCPEASY_CONTEXT_PATH)

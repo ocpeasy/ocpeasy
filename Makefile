@@ -3,6 +3,7 @@ POETRY_BIN:=~/.poetry/bin/poetry
 FLAKE8_RULES:= E123,W503
 SOURCE_PATH:=ocpeasy
 COVERAGE_BADGE_PATH:=badges/coverage.svg
+PROJECT_DEV_PATH:=/Users/david/ocpeasy-test
 
 install:
 	$(POETRY_BIN) config -vvv virtualenvs.create false \
@@ -15,7 +16,7 @@ scaffold:
 	$(POETRY_BIN) run python3 $(SOURCE_PATH) scaffold
 
 create_stage:
-	export POETRY_DEV_PATH=/Users/david/ocpeasy-test && $(POETRY_BIN) run python3 $(SOURCE_PATH) createStage
+	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) createStage
 
 lint:
 	$(POETRY_BIN) run flake8 --select $(FLAKE8_RULES) $(SOURCE_PATH)/* -v

@@ -39,9 +39,10 @@ def test_createNewSessionId():
 def test_cloneStrategyRepository():
     sessionUuid = createNewSessionId()
     cloneStrategyRepository(sessionUuid)
-    assert path.exists(f"/tmp/{sessionUuid}")
+    sessionWorkspace = f"/tmp/{sessionUuid}"
+    assert path.exists(sessionWorkspace)
     cleanWorkspace(sessionUuid)
-    assert not path.exists(f"/tmp/{sessionUuid}")
+    assert not path.exists(sessionWorkspace)
 
 
 def test_replaceAll():

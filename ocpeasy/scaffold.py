@@ -158,14 +158,12 @@ def scaffold():
     del templateMeta["projectName"]
 
     ocpeasyConfig = {
-        # "containerRoute": containerRoute,
         "projectName": scaffoldConfig["projectName"],
-        # "containerId": containerId,
         "gitRepository": gitRepository,
         "gitCredentialsId": gitCredentialsId,
-        # "podReplicas": podReplicas,
-        "templateMeta": {**templateMeta}
-        # TODO: add SHA template
+        # TODO: add SHA template,
+        "templateMeta": {**templateMeta},
+        "stages": [],
     }
 
     with open(f"{PATH_PROJECT}/{OCPEASY_CONFIG_NAME}", "w") as f:
