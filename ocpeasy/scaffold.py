@@ -101,13 +101,9 @@ def getOpenshiftRepositoryMetadata(projectName: str):
     gitCredentialsId = getPrompt(
         f"What's the git credential ID?", "gogs-repo-pw"
     )  # noqa: E501
-    # podReplicas = int(getPrompt(f"How many PoD/replicas for this app?", str(2)))
     return (
-        # containerId,
-        # containerRoute,
         gitRepository,
         gitCredentialsId,
-        # podReplicas,
     )  # noqa: E501
 
 
@@ -147,11 +143,8 @@ def scaffold():
     shutil.rmtree(f"{PATH_PROJECT}/.git", ignore_errors=True)
 
     (
-        containerId,
-        containerRoute,
         gitRepository,
         gitCredentialsId,
-        podReplicas,
     ) = getOpenshiftRepositoryMetadata(scaffoldConfig["projectName"])
 
     templateMeta = dict(scaffoldConfig)
