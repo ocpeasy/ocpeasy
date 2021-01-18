@@ -28,6 +28,11 @@ def createStage():
 
     if ocpPeasyConfigFound:
         sessionId = createNewSessionId()
+        deployConfigDict = dict()
+        # will contain stage related metadata
+        stageConfiguration = dict()
+        # will contain token to be replaced into yml config
+        tokenConfiguration = dict()
         # TODO: validate ocpeasy.yml file
         # TODO: open ocpeasy as dict
         with open(ocpPeasyConfigPath) as ocpPeasyConfigFile:
@@ -43,8 +48,6 @@ def createStage():
                 # shutil.rmtree(OCPEASY_DEPLOYMENT_PATH, ignore_errors=True)
                 if not path.exists(OCPEASY_DEPLOYMENT_PATH):
                     mkdir(OCPEASY_DEPLOYMENT_PATH)
-
-                stageConfiguration = tokenConfiguration = {}
 
                 # get from CLI (e.g.: --stage=dev) ?
                 # TODO: check if stage already exists
@@ -68,6 +71,7 @@ def createStage():
                 stageConfiguration["containerId"] = containerId
                 stageConfiguration["containerRouter"] = containerRouter
                 stageConfiguration["podReplicas"] = podReplicas
+                # TODO: dockerfile
 
                 tokenConfiguration["ocpProject"] = ocpProject
                 tokenConfiguration["containerId"] = containerId
@@ -103,7 +107,14 @@ def createStage():
                 print("Creation of the directory %s failed" % OCPEASY_CONTEXT_PATH)
 
             cleanWorkspace(sessionId)
+            deployConfigDict = {
+                **deployConfigDict,
+                "stages": [*deployConfigDict["stages"], stageConfiguration],
+            }
+            # TODO: overwrite the ocpeasy.yml file
+        with open(ocpPeasyConfigPath, "w") as ocpPeasyConfigFile:
+            ocpPeasyConfigFile.write(yaml.dump(deployConfigDict))
 
     print(
-        f"\n\nnew OpenShift stage created ({stageId}) for project [{pathProject}] \u2713"
+        f"\nnew OpenShift stage created ({stageId}) for project [{pathProject}] \u2713"
     )
