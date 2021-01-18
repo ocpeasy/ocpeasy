@@ -4,7 +4,11 @@ from .utils import (
     removeTrailSlash,
     createNewSessionId,
     cloneStrategyRepository,
+    cleanWorkspace,
+    replaceAll,
 )
+
+from os import path
 
 
 def test_buildMenuOptions():
@@ -35,3 +39,10 @@ def test_createNewSessionId():
 def test_cloneStrategyRepository():
     sessionUuid = createNewSessionId()
     cloneStrategyRepository(sessionUuid)
+    assert path.exists(f"/tmp/{sessionUuid}")
+    cleanWorkspace(sessionUuid)
+    assert not path.exists(f"/tmp/{sessionUuid}")
+
+
+def test_replaceAll():
+    assert replaceAll("[[containerId]]", {"containerId": "helloWorld"}) == "helloWorld"

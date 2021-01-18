@@ -2,6 +2,8 @@ from git import Repo
 from os import walk
 from simple_term_menu import TerminalMenu
 import yaml
+import shutil
+
 from .utils import (
     buildMenuOptions,
     getPrompt,
@@ -18,8 +20,6 @@ from .constants import (
     OCPEASY_CONFIG_NAME,
     PLATFORM_LABEL,
 )
-
-import shutil
 
 
 def getStrategyVersions(sessionUuid: str):
@@ -95,11 +95,6 @@ def confirmSelection():
 def getOpenshiftRepositoryMetadata(projectName: str):
     # TODO: add rule to prevent camelcase and special characters
     # TODO: get those parameters in the stage generation
-    # containerId = getPrompt("Type your OpenShift container ID:")
-    # # default novartis: testpython-dedrr.statwb.eu.novartis.net
-    # containerRoute = getPrompt(
-    #     "Type your route:", f"{containerId}-{projectName}.<host>"
-    # )  # noqa: E501
     gitRepository = getPrompt(
         f"Where will reside your code?", "https://www.github.com/user/repo.git"
     )
