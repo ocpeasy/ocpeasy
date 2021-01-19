@@ -3,7 +3,7 @@ POETRY_BIN:=~/.poetry/bin/poetry
 FLAKE8_RULES:= E123,W503
 SOURCE_PATH:=ocpeasy
 COVERAGE_BADGE_PATH:=badges/coverage.svg
-PROJECT_DEV_PATH:=/Users/david/ocpeasy-test
+PROJECT_DEV_PATH:=/Users/barrada3/cm-api-ocp
 
 install:
 	$(POETRY_BIN) config -vvv virtualenvs.create false \
@@ -41,3 +41,6 @@ build:
 
 publish:
 	$(POETRY_BIN) publish
+
+obfuscate:
+	pyarmor obfuscate /path

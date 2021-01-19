@@ -332,6 +332,14 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
 [[package]]
+name = "pyarmor"
+version = "6.6.0"
+description = "A tool used to obfuscate python scripts, bind obfuscated scripts to fixed machine or expire obfuscated scripts."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "pycodestyle"
 version = "2.6.0"
 description = "Python style guide checker"
@@ -522,7 +530,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9.0"
-content-hash = "dda7b54f258d30c967199ae872a6052c4f8d4de1c0508afabf2d2cf9cd7c0d71"
+content-hash = "6aa26dd6012f2dd5014408a17d4df11c34ad2e77598ad9318ad19467feb6f57b"
 
 [metadata.files]
 appdirs = [
@@ -740,6 +748,10 @@ pre-commit = [
 py = [
     {file = "py-1.10.0-py2.py3-none-any.whl", hash = "sha256:3b80836aa6d1feeaa108e046da6423ab8f6ceda6468545ae8d02d9d58d18818a"},
     {file = "py-1.10.0.tar.gz", hash = "sha256:21b81bda15b66ef5e1a777a21c4dcd9c20ad3efd0b3f817e7a809035269e1bd3"},
+]
+pyarmor = [
+    {file = "pyarmor-6.6.0-py2.py3-none-any.whl", hash = "sha256:2ef2ab97c3e5606206c0299e70732d55861b6ebcea9a05a557ba76cbaf9e69bb"},
+    {file = "pyarmor-6.6.0.zip", hash = "sha256:e1f615d6e0655563d55fd3619a96e204006e7a78459476f6a093432edac6fdba"},
 ]
 pycodestyle = [
     {file = "pycodestyle-2.6.0-py2.py3-none-any.whl", hash = "sha256:2295e7b2f6b5bd100585ebcb1f616591b652db8a741695b3d8f5d28bdc934367"},
