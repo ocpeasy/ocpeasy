@@ -4,8 +4,10 @@ from sh import ErrorReturnCode
 
 log = logging.getLogger(__name__)
 
+
 def runOc(*args, **kwargs):
     return sh.oc(*args, **kwargs, _tee=True)
+
 
 def applyStage(project, stagePath):
     getProject(project)
@@ -13,6 +15,7 @@ def applyStage(project, stagePath):
         runOc("apply", "-f", stagePath)
     except ErrorReturnCode as err:
         log.error(err)
+
 
 def getProject(projectId):
     try:
