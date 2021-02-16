@@ -3,7 +3,7 @@ POETRY_BIN:=~/.poetry/bin/poetry
 FLAKE8_RULES:= E123,W503
 SOURCE_PATH:=ocpeasy
 COVERAGE_BADGE_PATH:=badges/coverage.svg
-PROJECT_DEV_PATH:=/Users/barrada3/cm-api-ocp
+PROJECT_DEV_PATH:=/Users/barrada3/clinical-meta
 
 install:
 	$(POETRY_BIN) config -vvv virtualenvs.create false \
@@ -17,6 +17,12 @@ scaffold:
 
 create_stage:
 	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) createStage
+
+compose:
+	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && echo TODO
+
+deploy:
+	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) deploy --stageId=dev
 
 lint:
 	$(POETRY_BIN) run flake8 --select $(FLAKE8_RULES) $(SOURCE_PATH)/* -v

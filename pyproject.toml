@@ -5,12 +5,14 @@ description = ""
 authors = ["David Barrat <david@barrat.io>"]
 
 [tool.poetry.dependencies]
-python = "3.9.0"
+python = "3.9.1"
 fire = "^0.3.1"
 GitPython = "^3.1.12"
 simple-term-menu = "^0.10.4"
 PyYAML = "^5.3.1"
-openshift-client = "^1.0.12"
+openshift-client = "1.0.12"
+cryptography = "3.4.5"
+sh = "^1.14.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.4"
