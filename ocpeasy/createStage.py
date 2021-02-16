@@ -43,6 +43,8 @@ def createStage():
             for excluded in excludedKeys:
                 del globalValues[excluded]
 
+            print(deployConfigDict["stages"])
+
             cloneStrategyRepository(sessionId)
             OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
             try:
@@ -55,6 +57,19 @@ def createStage():
                 stageId = getPrompt(
                     f"What's the id of your stage (default: development)", "development"
                 )
+
+                similarStageId = list(
+                    filter(
+                        lambda x: (x.get("stageId") == stageId),
+                        deployConfigDict["stages"],
+                    )
+                )
+                if len(similarStageId) > 0:
+                    print(
+                        f"\nOpenShift stage ({stageId}) for project [{pathProject}] exists already \u274c"
+                    )
+                    return
+
                 ocpProject = getPrompt(f"What's the name of the OpenShift project")
                 # TODO: check if the container name already exists for the project
                 containerId = getPrompt(
