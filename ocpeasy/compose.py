@@ -33,6 +33,10 @@ def getModuleTypes(PATH_MODULES: str):
         return sortedModules[menu_entry_index]
 
 
+def getModulesPerKind(PATH_MODULES: str, moduleId: str):
+    pass
+
+
 def compose():
     sessionUuid = createNewSessionId()
     prepareWorkspace(sessionUuid)

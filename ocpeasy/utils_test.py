@@ -6,9 +6,18 @@ from .utils import (
     cloneStrategyRepository,
     cleanWorkspace,
     replaceAll,
+    prepareWorkspace,
 )
 
 from os import path
+
+
+def test_prepareWorkspace():
+    sessionUuid = createNewSessionId()
+    prepareWorkspace(sessionUuid)
+    pathToCheck = f"/tmp/{sessionUuid}/openshift_3_4/profiles/defaultApp/route.yaml"
+    assert path.exists(pathToCheck)
+    cleanWorkspace(sessionUuid)
 
 
 def test_buildMenuOptions():
