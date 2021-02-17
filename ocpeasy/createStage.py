@@ -87,6 +87,8 @@ def createStage():
                 stageConfiguration["containerId"] = containerId
                 stageConfiguration["containerRouter"] = containerRouter
                 stageConfiguration["podReplicas"] = podReplicas
+                stageConfiguration["modules"] = []
+                stageConfiguration["dockerfile"] = "./Dockerfile"
                 # TODO: dockerfile
 
                 tokenConfiguration["ocpProject"] = ocpProject

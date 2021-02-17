@@ -10,10 +10,10 @@ from .utils import (
     removeTrailSlash,
     createNewSessionId,
     cleanWorkspace,
+    prepareWorkspace,
 )
 
 from .constants import (
-    BASE_STRATEGIES_REPOSITORY,
     MENU_CURSOR_STYLE,
     PREFIX_STRATEGY,
     SHOW_SEARCH_HINT,
@@ -24,7 +24,6 @@ from .constants import (
 
 def getStrategyVersions(sessionUuid: str):
     PATH_SESSION = f"/tmp/{sessionUuid}"
-    Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION)
     _, folders, _ = next(walk(PATH_SESSION))
     strategies = list(filter(lambda x: x.startswith(PREFIX_STRATEGY), folders))
     strategiesOptions = [
@@ -110,6 +109,9 @@ def getOpenshiftRepositoryMetadata(projectName: str):
 def scaffold():
     scaffoldConfig = {}
     sessionUuid = createNewSessionId()
+
+    prepareWorkspace(sessionUuid)
+
     scaffoldConfig["strategy"] = getStrategyVersions(sessionUuid)
 
     PATH_TEMPLATES = f"/tmp/{sessionUuid}/templates/latest.yml"

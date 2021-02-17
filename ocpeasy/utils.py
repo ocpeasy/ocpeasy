@@ -5,6 +5,11 @@ from git import Repo
 import shutil
 
 
+def prepareWorkspace(sessionUuid: str):
+    PATH_SESSION = f"/tmp/{sessionUuid}"
+    Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION)
+
+
 def createNewSessionId():
     return uuid4().hex
 
