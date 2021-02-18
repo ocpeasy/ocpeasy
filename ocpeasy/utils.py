@@ -17,8 +17,19 @@ def createNewSessionId():
 def buildMenuOptions(arr):
     counter = 0
     options = []
+    canHaveIndex = len(arr) < 35
     for el in arr:
-        options.append(f"[{ALPHABET_LIST_CHAR[counter]}] {el}")
+        index = -1
+        if canHaveIndex:
+            if counter < len(ALPHABET_LIST_CHAR):
+                index = ALPHABET_LIST_CHAR[counter]
+            else:
+                index = f"{counter - len(ALPHABET_LIST_CHAR)}"
+
+        if canHaveIndex:
+            options.append(f"[{index}] {el}")
+        else:
+            options.append(f"{el}")
         counter += 1
     return options
 

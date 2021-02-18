@@ -19,7 +19,7 @@ create_stage:
 	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) createStage
 
 compose:
-	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) compose
+	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) compose --stageId=uat
 
 deploy:
 	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) deploy --stageId=dev
