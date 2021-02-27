@@ -99,6 +99,7 @@ def createStage(proxy: str = None):
                     "gitCredentialsId"
                 ]
 
+                # TODO: isolate as writeStageYaml
                 strategyId = deployConfigDict["templateMeta"]["strategy"]
                 OCP_PROFILE_PATH = f"/tmp/{sessionId}/{strategyId}/profiles/{deployConfigDict['templateMeta']['profile']}"
                 _, _, configFiles = next(walk(OCP_PROFILE_PATH))
@@ -117,12 +118,12 @@ def createStage(proxy: str = None):
                         stageConfigFile = f"{STAGE_CONFIG_ROOT}/{configFile}"
                         with open(stageConfigFile, "w") as configTarget:
                             configTarget.write(ocpContextBuild)
-                # append the stage to the ocpeasy.yml file
 
             except OSError:
                 print("Creation of the directory %s failed" % OCPEASY_CONTEXT_PATH)
 
             cleanWorkspace(sessionId)
+            # append the stage to the ocpeasy.yml file
             deployConfigDict = {
                 **deployConfigDict,
                 "stages": [*deployConfigDict["stages"], stageConfiguration],

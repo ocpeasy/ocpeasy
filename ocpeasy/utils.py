@@ -64,3 +64,6 @@ def replaceAll(text: str, dic: dict):
     for i in dic.keys():
         text = text.replace(f"{i}", dic.get(i))
     return text.replace("[", "").replace("]", "")
+
+def writeStageYaml(sessionId: str):
+    pass
