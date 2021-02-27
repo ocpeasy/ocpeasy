@@ -5,9 +5,8 @@ from git import Repo
 import shutil
 
 
-def prepareWorkspace(sessionUuid: str):
-    PATH_SESSION = f"/tmp/{sessionUuid}"
-    Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION)
+def prepareWorkspace(sessionUuid: str, proxy: str = None):
+    cloneStrategyRepository(sessionUuid, proxy)
 
 
 def createNewSessionId():
@@ -51,9 +50,10 @@ def removeTrailSlash(uri: str):
     return uri
 
 
-def cloneStrategyRepository(sessionId):
+def cloneStrategyRepository(sessionId: str, proxy: str = None):
     PATH_SESSION = f"/tmp/{sessionId}"
-    Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION)
+    kwargs = {'config':f"http.proxy={proxy}"} if proxy != None else {}
+    Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION, **kwargs)
 
 
 def cleanWorkspace(sessionId: str):

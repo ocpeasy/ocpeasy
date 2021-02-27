@@ -108,11 +108,11 @@ def getOpenshiftRepositoryMetadata(projectName: str):
     )  # noqa: E501
 
 
-def scaffold():
+def scaffold(proxy: str = None):
     scaffoldConfig = {}
     sessionUuid = createNewSessionId()
 
-    prepareWorkspace(sessionUuid)
+    prepareWorkspace(sessionUuid, proxy)
 
     scaffoldConfig["strategy"] = getStrategyVersions(sessionUuid)
 
@@ -140,8 +140,9 @@ def scaffold():
     PATH_PROJECT = (
         f"{removeTrailSlash(relativeProjectPath)}/{scaffoldConfig['projectName']}"
     )
-    # PATH_PROJECT = f"/tmp/{scaffoldConfig['projectName']}"
-    Repo.clone_from(f"{scaffoldConfig['templateUri']}", PATH_PROJECT)
+
+    gitConfig = f"http.proxy={proxy}" if proxy != None else ''
+    Repo.clone_from(f"{scaffoldConfig['templateUri']}", PATH_PROJECT, config=f"{gitConfig}")
     # TODO: get SHA from head
 
     shutil.rmtree(f"{PATH_PROJECT}/.git", ignore_errors=True)

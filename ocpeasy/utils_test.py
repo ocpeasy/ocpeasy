@@ -14,7 +14,7 @@ from os import path
 
 def test_prepareWorkspace():
     sessionUuid = createNewSessionId()
-    prepareWorkspace(sessionUuid)
+    prepareWorkspace(sessionUuid, None)
     pathToCheck = f"/tmp/{sessionUuid}/openshift_3_4/profiles/defaultApp/route.yaml"
     assert path.exists(pathToCheck)
     cleanWorkspace(sessionUuid)
@@ -47,7 +47,7 @@ def test_createNewSessionId():
 
 def test_cloneStrategyRepository():
     sessionUuid = createNewSessionId()
-    cloneStrategyRepository(sessionUuid)
+    cloneStrategyRepository(sessionUuid, None)
     sessionWorkspace = f"/tmp/{sessionUuid}"
     assert path.exists(sessionWorkspace)
     cleanWorkspace(sessionUuid)

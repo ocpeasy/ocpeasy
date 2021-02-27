@@ -1,23 +1,23 @@
-import openshift as oc
+# import openshift as oc
 from .ocUtils import applyStage
 from os import environ
 
 PREFIX_PROJECT_ROOT = environ.get("PROJECT_DEV_PATH", ".")
 
 
-def deploy(stageId: str):
+def deploy(projectId: str, stageId: str):
     print("OpenShift server version: {}".format(oc.get_server_version()))
 
-    applyStage("cnrg", f"{PREFIX_PROJECT_ROOT}/.ocpeasy/{stageId}")
+    applyStage(projectId, f"{PREFIX_PROJECT_ROOT}/.ocpeasy/{stageId}")
 
     # Set a project context for all inner `oc` invocations and limit execution to 10 minutes
-    with oc.project("cnrg"), oc.timeout(10 * 60):
-        # Print the list of qualified pod names (e.g. ['pod/xyz', 'pod/abc', ...]  in the current project
-        print(
-            "Found the following pods in {}: {}".format(
-                oc.get_project_name(), oc.selector("pods").qnames()
-            )
-        )
+    # with oc.project(projectId), oc.timeout(10 * 60):
+    #     # Print the list of qualified pod names (e.g. ['pod/xyz', 'pod/abc', ...]  in the current project
+    #     print(
+    #         "Found the following pods in {}: {}".format(
+    #             oc.get_project_name(), oc.selector("pods").qnames()
+    #         )
+    #     )
 
     # connect to OCP
     # TODO: check if the project has been initialized / ocpeasy.yml exists

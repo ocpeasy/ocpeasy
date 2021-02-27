@@ -14,7 +14,7 @@ import yaml
 from .__version__ import __version__
 
 
-def createStage():
+def createStage(proxy: str = None):
     projectDevPath = getenv("PROJECT_DEV_PATH", None)
     pathProject = "." if not projectDevPath else removeTrailSlash(projectDevPath)
 
@@ -44,7 +44,7 @@ def createStage():
             for excluded in excludedKeys:
                 del globalValues[excluded]
 
-            cloneStrategyRepository(sessionId)
+            cloneStrategyRepository(sessionId, proxy)
             OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
             try:
                 # shutil.rmtree(OCPEASY_DEPLOYMENT_PATH, ignore_errors=True)
@@ -74,8 +74,8 @@ def createStage():
                 containerId = getPrompt(
                     f"What's the OpenShift container ID/Name (unique per project)"
                 )
-                containerRouter = getPrompt(
-                    f"What's the route of your application? (http(?s)://{containerId}-{ocpProject}.<hostOcp>)"
+                containerRoute = getPrompt(
+                    f"What's the route of your application? (no scheme!!!) ({containerId}-{ocpProject}.<hostOcp>)"
                 )
                 podReplicas = getPrompt(
                     f"What's the number of replicas required for your app?"
@@ -84,14 +84,14 @@ def createStage():
                 stageConfiguration["stageId"] = stageId
                 stageConfiguration["ocpProject"] = ocpProject
                 stageConfiguration["containerId"] = containerId
-                stageConfiguration["containerRouter"] = containerRouter
+                stageConfiguration["containerRoute"] = containerRoute
                 stageConfiguration["podReplicas"] = podReplicas
                 stageConfiguration["modules"] = []
                 stageConfiguration["dockerfile"] = "./Dockerfile"
 
                 tokenConfiguration["ocpProject"] = ocpProject
                 tokenConfiguration["containerId"] = containerId
-                tokenConfiguration["containerRouter"] = containerRouter
+                tokenConfiguration["containerRoute"] = containerRoute
                 tokenConfiguration["podReplicas"] = podReplicas
                 tokenConfiguration["generatedBy"] = f"{CLI_NAME} CLI ({__version__})"
                 tokenConfiguration["gitRepository"] = globalValues["gitRepository"]

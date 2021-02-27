@@ -47,7 +47,7 @@ def getModulesPerKind(PATH_MODULES: str, moduleKindId: str):
         return filteredRecords[menu_entry_index]
 
 
-def compose(stageId: str = None):
+def compose(stageId: str = None, proxy: str = None):
     # TODO: select one or more stage to which module is required
 
     projectDevPath = getenv("PROJECT_DEV_PATH", None)
