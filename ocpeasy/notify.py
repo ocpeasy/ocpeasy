@@ -1,5 +1,5 @@
 def missingConfigurationFile():
-    print(f"\u274c nocpeasy.yml file does not exist, run `ocpeasy init` first")
+    print(f"\u274c nocpeasy.yml file does not exist, run `ocpeasy scaffold|init` first")
 
 
 def stageCreated(stageId: str, pathProject: str):
@@ -8,3 +8,6 @@ def stageCreated(stageId: str, pathProject: str):
 
 def ocpeasyConfigFileUpdated():
     print(f"\u2713 ocpeasy.yml file refreshed")
+
+def missingStage():
+    print(f"\u274c stage doesn't exist")
