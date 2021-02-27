@@ -24,6 +24,9 @@ compose:
 deploy:
 	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) deploy --projectId=oprod --stageId=prod
 
+destroy:
+	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) destroy --stageId=prod
+
 lint:
 	$(POETRY_BIN) run flake8 --select $(FLAKE8_RULES) $(SOURCE_PATH)/* -v
 

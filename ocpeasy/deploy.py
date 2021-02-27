@@ -6,8 +6,8 @@ PREFIX_PROJECT_ROOT = environ.get("PROJECT_DEV_PATH", ".")
 
 
 def deploy(projectId: str, stageId: str):
-    print("OpenShift server version: {}".format(oc.get_server_version()))
-
+    # print("OpenShift server version: {}".format(oc.get_server_version()))
+    # generateYaml
     applyStage(projectId, f"{PREFIX_PROJECT_ROOT}/.ocpeasy/{stageId}")
 
     # Set a project context for all inner `oc` invocations and limit execution to 10 minutes
