@@ -52,7 +52,7 @@ def removeTrailSlash(uri: str):
 
 def cloneStrategyRepository(sessionId: str, proxy: str = None):
     PATH_SESSION = f"/tmp/{sessionId}"
-    kwargs = {'config':f"http.proxy={proxy}"} if proxy != None else {}
+    kwargs = {"config": f"http.proxy={proxy}"} if proxy != None else {}
     Repo.clone_from(f"{BASE_STRATEGIES_REPOSITORY}", PATH_SESSION, **kwargs)
 
 
@@ -64,6 +64,7 @@ def replaceAll(text: str, dic: dict):
     for i in dic.keys():
         text = text.replace(f"{i}", dic.get(i))
     return text.replace("[", "").replace("]", "")
+
 
 def writeStageYaml(sessionId: str):
     pass

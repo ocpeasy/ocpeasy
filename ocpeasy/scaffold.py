@@ -141,8 +141,10 @@ def scaffold(proxy: str = None):
         f"{removeTrailSlash(relativeProjectPath)}/{scaffoldConfig['projectName']}"
     )
 
-    gitConfig = f"http.proxy={proxy}" if proxy != None else ''
-    Repo.clone_from(f"{scaffoldConfig['templateUri']}", PATH_PROJECT, config=f"{gitConfig}")
+    gitConfig = f"http.proxy={proxy}" if proxy != None else ""
+    Repo.clone_from(
+        f"{scaffoldConfig['templateUri']}", PATH_PROJECT, config=f"{gitConfig}"
+    )
     # TODO: get SHA from head
 
     shutil.rmtree(f"{PATH_PROJECT}/.git", ignore_errors=True)
