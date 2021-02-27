@@ -43,7 +43,9 @@ def getStrategyVersions(sessionUuid: str):
 def getTechnology(PATH_TEMPLATES: str):
     with open(PATH_TEMPLATES) as f:
         data = yaml.load(f, Loader=yaml.FullLoader)
-        sortedTechnologies = sorted(list(map(lambda x: x["technology"], data)))
+        sortedTechnologies = list(
+            set(sorted(list(map(lambda x: x["technology"], data))))
+        )
         technologies = buildMenuOptions(sortedTechnologies)
         terminal_menu = TerminalMenu(
             technologies,

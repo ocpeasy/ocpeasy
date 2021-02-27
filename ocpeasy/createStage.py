@@ -8,14 +8,15 @@ from .utils import (
     replaceAll,
 )
 from .constants import OCPEASY_CONFIG_NAME, OCPEASY_CONTEXT_PATH, CLI_NAME
+from .notify import missingConfigurationFile, stageCreated
 import yaml
 
 from .__version__ import __version__
 
 
 def createStage():
-    projectEnvPath = getenv("PROJECT_DEV_PATH", None)
-    pathProject = "." if not projectEnvPath else removeTrailSlash(projectEnvPath)
+    projectDevPath = getenv("PROJECT_DEV_PATH", None)
+    pathProject = "." if not projectDevPath else removeTrailSlash(projectDevPath)
 
     # check if ocpeasy config exists
     ocpPeasyConfigFound = False
@@ -24,7 +25,7 @@ def createStage():
     if path.isfile(ocpPeasyConfigPath):
         ocpPeasyConfigFound = True
     else:
-        print(f"\nocpeasy.yml file does not exist, run `ocpeasy init` first. \u274c")
+        missingConfigurationFile()
         return
 
     if ocpPeasyConfigFound:
@@ -42,8 +43,6 @@ def createStage():
             excludedKeys = ["templateMeta", "stages"]
             for excluded in excludedKeys:
                 del globalValues[excluded]
-
-            print(deployConfigDict["stages"])
 
             cloneStrategyRepository(sessionId)
             OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
@@ -89,7 +88,6 @@ def createStage():
                 stageConfiguration["podReplicas"] = podReplicas
                 stageConfiguration["modules"] = []
                 stageConfiguration["dockerfile"] = "./Dockerfile"
-                # TODO: dockerfile
 
                 tokenConfiguration["ocpProject"] = ocpProject
                 tokenConfiguration["containerId"] = containerId
@@ -129,10 +127,8 @@ def createStage():
                 **deployConfigDict,
                 "stages": [*deployConfigDict["stages"], stageConfiguration],
             }
-            # TODO: overwrite the ocpeasy.yml file
+
         with open(ocpPeasyConfigPath, "w") as ocpPeasyConfigFile:
             ocpPeasyConfigFile.write(yaml.dump(deployConfigDict))
 
-    print(
-        f"\nnew OpenShift stage created ({stageId}) for project [{pathProject}] \u2713"
-    )
+    stageCreated(stageId, pathProject)
