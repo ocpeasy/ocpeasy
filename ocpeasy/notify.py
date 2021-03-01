@@ -9,5 +9,10 @@ def stageCreated(stageId: str, pathProject: str):
 def ocpeasyConfigFileUpdated():
     print(f"\u2713 ocpeasy.yml file refreshed")
 
+
 def missingStage():
     print(f"\u274c stage doesn't exist")
+
+
+def ocpeasyStageAssetsGenerated():
+    print(f"\u2713 OpenShift assets generated")

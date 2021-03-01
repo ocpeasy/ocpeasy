@@ -5,7 +5,7 @@ description = ""
 authors = ["David Barrat <david@barrat.io>"]
 
 [tool.poetry.dependencies]
-python = "3.9.1"
+python = "^3.8"
 fire = "^0.3.1"
 GitPython = "^3.1.12"
 simple-term-menu = "^0.10.4"

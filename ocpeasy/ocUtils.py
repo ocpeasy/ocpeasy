@@ -17,17 +17,17 @@ def applyStage(project: str, stagePath: str):
         log.error(err)
 
 
-def getProject(projectId):
+def getProject(projectId: str):
     try:
         runOc("project", projectId)
     except ErrorReturnCode:
         log.error(f"Unable to get {projectId}")
 
 
-def destroyApplication(project: str, applicationId: str):
-    getProject(project)
+def destroyApplication(projectId: str, applicationId: str):
+    getProject(projectId)
     try:
-        runOc("delete", "all", '--selector', f"app={applicationId}")
+        runOc("delete", "all", "--selector", f"app={applicationId}")
         runOc("delete", "bc", applicationId)
         runOc("delete", "dc", applicationId)
     except ErrorReturnCode:

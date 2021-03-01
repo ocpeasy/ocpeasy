@@ -1,20 +1,17 @@
-from os import path, getenv, mkdir, walk
+from os import path, getenv, mkdir
 from .utils import (
     removeTrailSlash,
     createNewSessionId,
     cloneStrategyRepository,
     cleanWorkspace,
     getPrompt,
-    replaceAll,
 )
-from .constants import OCPEASY_CONFIG_NAME, OCPEASY_CONTEXT_PATH, CLI_NAME
+from .constants import OCPEASY_CONFIG_NAME, OCPEASY_CONTEXT_PATH
 from .notify import missingConfigurationFile, stageCreated
 import yaml
 
-from .__version__ import __version__
 
-
-def createStage(proxy: str = None):
+def createStage():
     projectDevPath = getenv("PROJECT_DEV_PATH", None)
     pathProject = "." if not projectDevPath else removeTrailSlash(projectDevPath)
 
@@ -33,10 +30,6 @@ def createStage(proxy: str = None):
         deployConfigDict = dict()
         # will contain stage related metadata
         stageConfiguration = dict()
-        # will contain token to be replaced into yml config
-        tokenConfiguration = dict()
-        # TODO: validate ocpeasy.yml file
-        # TODO: open ocpeasy as dict
         with open(ocpPeasyConfigPath) as ocpPeasyConfigFile:
             deployConfigDict = yaml.load(ocpPeasyConfigFile, Loader=yaml.FullLoader)
             globalValues = dict(deployConfigDict)
@@ -44,7 +37,7 @@ def createStage(proxy: str = None):
             for excluded in excludedKeys:
                 del globalValues[excluded]
 
-            cloneStrategyRepository(sessionId, proxy)
+            cloneStrategyRepository(sessionId)
             OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
             try:
                 # shutil.rmtree(OCPEASY_DEPLOYMENT_PATH, ignore_errors=True)
@@ -74,8 +67,8 @@ def createStage(proxy: str = None):
                 containerId = getPrompt(
                     f"What's the OpenShift container ID/Name (unique per project)"
                 )
-                containerRoute = getPrompt(
-                    f"What's the route of your application? (no scheme!!!) ({containerId}-{ocpProject}.<hostOcp>)"
+                containerRouter = getPrompt(
+                    f"What's the route of your application? [{containerId}-{ocpProject}.<hostOcp>]"
                 )
                 podReplicas = getPrompt(
                     f"What's the number of replicas required for your app?"
@@ -84,46 +77,15 @@ def createStage(proxy: str = None):
                 stageConfiguration["stageId"] = stageId
                 stageConfiguration["ocpProject"] = ocpProject
                 stageConfiguration["containerId"] = containerId
-                stageConfiguration["containerRoute"] = containerRoute
+                stageConfiguration["containerRouter"] = containerRouter
                 stageConfiguration["podReplicas"] = podReplicas
                 stageConfiguration["modules"] = []
                 stageConfiguration["dockerfile"] = "./Dockerfile"
-
-                tokenConfiguration["ocpProject"] = ocpProject
-                tokenConfiguration["containerId"] = containerId
-                tokenConfiguration["containerRoute"] = containerRoute
-                tokenConfiguration["podReplicas"] = podReplicas
-                tokenConfiguration["generatedBy"] = f"{CLI_NAME} CLI ({__version__})"
-                tokenConfiguration["gitRepository"] = globalValues["gitRepository"]
-                tokenConfiguration["gitCredentialsId"] = globalValues[
-                    "gitCredentialsId"
-                ]
-
-                # TODO: isolate as writeStageYaml
-                strategyId = deployConfigDict["templateMeta"]["strategy"]
-                OCP_PROFILE_PATH = f"/tmp/{sessionId}/{strategyId}/profiles/{deployConfigDict['templateMeta']['profile']}"
-                _, _, configFiles = next(walk(OCP_PROFILE_PATH))
-                # sample: configFiles = ['bc.yaml', 'svc.yaml', 'dc.yaml', 'route.yaml', 'img.yaml']
-                STAGE_CONFIG_ROOT = f"{OCPEASY_DEPLOYMENT_PATH}/{stageId}"
-                if not path.exists(STAGE_CONFIG_ROOT):
-                    mkdir(STAGE_CONFIG_ROOT)
-
-                for configFile in configFiles:
-                    configurationPath = f"{OCP_PROFILE_PATH}/{configFile}"
-                    with open(configurationPath) as f:
-                        configAsDict = yaml.load(f, Loader=yaml.FullLoader)
-                        ocpContextYaml = yaml.dump(configAsDict)
-                        ocpContextBuild = replaceAll(ocpContextYaml, tokenConfiguration)
-                        # generate yaml files in .ocpeasy/{stage}/{configFile}
-                        stageConfigFile = f"{STAGE_CONFIG_ROOT}/{configFile}"
-                        with open(stageConfigFile, "w") as configTarget:
-                            configTarget.write(ocpContextBuild)
 
             except OSError:
                 print("Creation of the directory %s failed" % OCPEASY_CONTEXT_PATH)
 
             cleanWorkspace(sessionId)
-            # append the stage to the ocpeasy.yml file
             deployConfigDict = {
                 **deployConfigDict,
                 "stages": [*deployConfigDict["stages"], stageConfiguration],

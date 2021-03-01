@@ -1,13 +1,14 @@
 # import openshift as oc
 from .ocUtils import applyStage
 from os import environ
-
-PREFIX_PROJECT_ROOT = environ.get("PROJECT_DEV_PATH", ".")
+from .utils import buildStageAssets
 
 
 def deploy(projectId: str, stageId: str):
     # print("OpenShift server version: {}".format(oc.get_server_version()))
     # generateYaml
+    buildStageAssets(stageId)
+    PREFIX_PROJECT_ROOT = environ.get("PROJECT_DEV_PATH", ".")
     applyStage(projectId, f"{PREFIX_PROJECT_ROOT}/.ocpeasy/{stageId}")
 
     # Set a project context for all inner `oc` invocations and limit execution to 10 minutes
