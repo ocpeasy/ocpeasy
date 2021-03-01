@@ -51,13 +51,17 @@ I added the following to my `.zshrc`
 
 - `oc login`
 
-### Flow Example
+### Scaffolding and multi-stage deployment
 
 - `ocpeasy scaffold`
 - `ocpeasy create_stage` (create a new dev stage for your project)
 - `ocpeasy deploy --stageId=dev`
 - `ocpeasy create_stage` (create a new prod stage for your project)
 - `ocpeasy deploy --stageId=prod`
+
+### Scaffolding behind a proxy
+
+- `ocpeasy scaffold --proxy=http://proxy.acme-corp.net:3450`
 
 ## License
 

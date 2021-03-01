@@ -3,7 +3,7 @@ POETRY_BIN:=~/.poetry/bin/poetry
 FLAKE8_RULES:= E123,W503
 SOURCE_PATH:=ocpeasy
 COVERAGE_BADGE_PATH:=badges/coverage.svg
-PROJECT_DEV_PATH:=/Users/david/flaskdemo
+PROJECT_DEV_PATH:=/Users/user/project
 
 install:
 	$(POETRY_BIN) config -vvv virtualenvs.create false \
@@ -13,13 +13,10 @@ config_precommit:
 	$(POETRY_BIN) run pre-commit install
 
 scaffold:
-	$(POETRY_BIN) run python3 $(SOURCE_PATH) scaffold --proxy=http://proxy.eu.novartis.net:2011
+	$(POETRY_BIN) run python3 $(SOURCE_PATH) scaffold
 
 create_stage:
-	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) createStage --proxy=http://proxy.eu.novartis.net:2011
-
-compose:
-	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) compose --stageId=uat --proxy=http://proxy.eu.novartis.net:2011
+	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) createStage
 
 deploy:
 	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) deploy --projectId=oprod --stageId=prod
@@ -50,6 +47,3 @@ build:
 
 publish:
 	$(POETRY_BIN) publish
-
-obfuscate:
-	pyarmor obfuscate /path
