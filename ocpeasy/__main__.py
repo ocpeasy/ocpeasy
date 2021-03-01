@@ -13,5 +13,8 @@ from ocpeasy.createStage import createStage  # noqa E402, F401
 from ocpeasy.deploy import deploy  # noqa E402, F401
 from ocpeasy.destroy import destroy  # noqa E402, F401
 
-if __name__ == "__main__":
+def cli():
     sys.exit(fire.Fire())
+
+if __name__ == "__main__":
+    cli()
