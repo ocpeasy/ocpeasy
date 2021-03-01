@@ -4,7 +4,7 @@ from os import environ
 from .utils import buildStageAssets
 
 
-def deploy(projectId: str, stageId: str, proxy: str):
+def deploy(projectId: str, stageId: str, proxy: str = None):
     # print("OpenShift server version: {}".format(oc.get_server_version()))
     # generateYaml
     buildStageAssets(stageId, proxy)

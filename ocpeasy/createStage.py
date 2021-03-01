@@ -11,7 +11,7 @@ from .notify import missingConfigurationFile, stageCreated
 import yaml
 
 
-def createStage(proxy: str):
+def createStage(proxy: str = None):
     projectDevPath = getenv("PROJECT_DEV_PATH", None)
     pathProject = "." if not projectDevPath else removeTrailSlash(projectDevPath)
 
