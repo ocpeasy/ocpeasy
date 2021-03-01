@@ -80,7 +80,7 @@ def replaceAll(text: str, dic: dict):
     return text.replace("[", "").replace("]", "")
 
 
-def buildStageAssets(stageId: str):
+def buildStageAssets(stageId: str, proxy: str):
     projectDevPath = getenv("PROJECT_DEV_PATH", None)
     pathProject = "." if not projectDevPath else removeTrailSlash(projectDevPath)
 
@@ -102,7 +102,7 @@ def buildStageAssets(stageId: str):
         tokenConfiguration = dict()
         # TODO: validate ocpeasy.yml file
 
-        cloneStrategyRepository(sessionId)
+        cloneStrategyRepository(sessionId, proxy)
         OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
 
         with open(ocpPeasyConfigPath) as ocpPeasyConfigFile:

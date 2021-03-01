@@ -11,7 +11,7 @@ from .notify import missingConfigurationFile, stageCreated
 import yaml
 
 
-def createStage():
+def createStage(proxy: str):
     projectDevPath = getenv("PROJECT_DEV_PATH", None)
     pathProject = "." if not projectDevPath else removeTrailSlash(projectDevPath)
 
@@ -37,7 +37,7 @@ def createStage():
             for excluded in excludedKeys:
                 del globalValues[excluded]
 
-            cloneStrategyRepository(sessionId)
+            cloneStrategyRepository(sessionId, proxy)
             OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
             try:
                 # shutil.rmtree(OCPEASY_DEPLOYMENT_PATH, ignore_errors=True)

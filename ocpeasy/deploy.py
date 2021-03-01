@@ -4,10 +4,10 @@ from os import environ
 from .utils import buildStageAssets
 
 
-def deploy(projectId: str, stageId: str):
+def deploy(projectId: str, stageId: str, proxy: str):
     # print("OpenShift server version: {}".format(oc.get_server_version()))
     # generateYaml
-    buildStageAssets(stageId)
+    buildStageAssets(stageId, proxy)
     PREFIX_PROJECT_ROOT = environ.get("PROJECT_DEV_PATH", ".")
     applyStage(projectId, f"{PREFIX_PROJECT_ROOT}/.ocpeasy/{stageId}")
 
