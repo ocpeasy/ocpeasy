@@ -67,7 +67,7 @@ def createStage(proxy: str = None):
                 containerId = getPrompt(
                     f"What's the OpenShift container ID/Name (unique per project)"
                 )
-                containerRouter = getPrompt(
+                containerRoute = getPrompt(
                     f"What's the route of your application? [{containerId}-{ocpProject}.<hostOcp>]"
                 )
                 podReplicas = getPrompt(
@@ -77,7 +77,7 @@ def createStage(proxy: str = None):
                 stageConfiguration["stageId"] = stageId
                 stageConfiguration["ocpProject"] = ocpProject
                 stageConfiguration["containerId"] = containerId
-                stageConfiguration["containerRouter"] = containerRouter
+                stageConfiguration["containerRoute"] = containerRouter
                 stageConfiguration["podReplicas"] = podReplicas
                 stageConfiguration["modules"] = []
                 stageConfiguration["dockerfile"] = "./Dockerfile"
