@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ocpeasy"
-version = "0.1.8"
+version = "0.1.9"
 authors = ["David Barrat <david.barrat@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
@@ -34,4 +34,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-ocpeasy = "ocpeasy:cli"
+ocpeasy = "ocpeasy.__main__:cli"
