@@ -40,6 +40,7 @@ I added the following to my `.zshrc`
 - [x] Configuring Tests/Linting
 - [x] Generate Project yaml `ocpeasy.yml`
 - [x] Generate Stage folder `<rootProject>/<.ocpeasy>/<stage>/[stagesFiles].yml`
+- [x] Supporting CLI invocation from `ocpeasy` directly
 - [ ] Supporting environment variables
 - [ ] Schema based validation
 - [ ] Composing existing stages with modules (e.g.: Databases, Caches, Messaging Queue, other applications etc...)
