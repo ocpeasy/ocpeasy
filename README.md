@@ -41,6 +41,7 @@ I added the following to my `.zshrc`
 - [x] Generate Project yaml `ocpeasy.yml`
 - [x] Generate Stage folder `<rootProject>/<.ocpeasy>/<stage>/[stagesFiles].yml`
 - [ ] Supporting environment variables
+- [ ] Schema based validation
 - [ ] Composing existing stages with modules (e.g.: Databases, Caches, Messaging Queue, other applications etc...)
 - [ ] Support SSH Keys for cloning (read: https://stackoverflow.com/questions/28291909/gitpython-and-ssh-keys)
 
