@@ -1,8 +1,13 @@
 [tool.poetry]
 name = "ocpeasy"
-version = "0.1.0"
-description = ""
-authors = ["David Barrat <david@barrat.io>"]
+version = "0.1.1"
+authors = ["David Barrat <david.barrat@protonmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://www.ocpeasy.org"
+repository = "https://github.com/ocpeasy/ocpeasy"
+documentation = "https://www.ocpeasy.org"
+description = "OCPeasy is an open-source software provisioning, configuration management, and application-deployment tool enabling infrastructure as code on OpenShift."
 
 [tool.poetry.dependencies]
 python = "^3.8"

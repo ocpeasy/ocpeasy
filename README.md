@@ -47,6 +47,18 @@ I added the following to my `.zshrc`
 
 ## Examples
 
+### Pre-requisite
+
+- `oc login`
+
+### Flow Example
+
+- `ocpeasy scaffold`
+- `ocpeasy create_stage` (create a new dev stage for your project)
+- `ocpeasy deploy --stageId=dev`
+- `ocpeasy create_stage` (create a new prod stage for your project)
+- `ocpeasy deploy --stageId=prod`
+
 ## License
 
 Copyright 2021 ocpeasy
