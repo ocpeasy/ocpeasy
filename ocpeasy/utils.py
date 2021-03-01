@@ -125,6 +125,8 @@ def buildStageAssets(stageId: str, proxy: str):
                 del stageConfiguration[excluded]
 
             tokenConfiguration = {
+                "gitRepository": deployConfigDict["gitRepository"],
+                "gitCredentialsId": deployConfigDict["gitCredentialsId"],
                 **stageConfiguration,
                 "generatedBy": f"{CLI_NAME} {__version__}",
             }
