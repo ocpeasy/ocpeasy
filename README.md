@@ -40,14 +40,19 @@ In order to add poetry binary to your $PATH environment variable, add the line b
 
 - `oc` corresponding to the version used by OpenShift server (https://docs.openshift.com/container-platform/4.1/release_notes/versioning-policy.html)
 
+### User guide:
+
+https://www.ocpeasy.org
+
+
 ## Roadmap
 
 - [x] Configuring Tests/Linting
 - [x] Generate Project yaml `ocpeasy.yml`
 - [x] Generate Stage folder `<rootProject>/<.ocpeasy>/<stage>/[stagesFiles].yml`
 - [x] Supporting CLI invocation from `ocpeasy` directly
-- [ ] Supporting environment variables
 - [ ] Schema based validation
+- [ ] Supporting environment variables
 - [ ] Composing existing stages with modules (e.g.: Databases, Caches, Messaging Queue, other applications etc...)
 - [ ] Support SSH Keys for cloning (read: https://stackoverflow.com/questions/28291909/gitpython-and-ssh-keys)
 
