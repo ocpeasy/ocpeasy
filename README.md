@@ -22,6 +22,14 @@ OCPeasy consists in a CLI to facilitate the deployment of OpenShift applications
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
 
+### Appendix
+
+The default install poetry location is `~/.poetry/bin/poetry`
+
+In order to add poetry binary to your $PATH environment variable, add the line below into your `.zshrc` (or equivalent)
+
+`export PATH=$PATH:$HOME/.poetry/bin`
+
 - pre-commit is required to ensure linting (with flake8) and formatting (with black) are applied before each commit
 
 `make config_precommit`
@@ -31,14 +39,6 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 ### Prerequisites (end user):
 
 - `oc` corresponding to the version used by OpenShift server (https://docs.openshift.com/container-platform/4.1/release_notes/versioning-policy.html)
-
-### Appendix
-
-The default install location is `~/.poetry/bin/poetry`
-
-I added the following to my `.zshrc`
-
-`export PATH=$PATH:$HOME/.poetry/bin`
 
 ## Roadmap
 
