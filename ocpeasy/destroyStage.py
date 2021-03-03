@@ -7,7 +7,7 @@ import yaml
 from .ocUtils import destroyApplication
 
 
-def destroy(stageId: str):
+def destroyStage(stageId: str):
     projectDevPath = getenv("PROJECT_DEV_PATH", None)
     pathProject = "." if not projectDevPath else removeTrailSlash(projectDevPath)
     ocpPeasyConfigPath = f"{pathProject}/{OCPEASY_CONFIG_NAME}"
