@@ -55,9 +55,9 @@ I added the following to my `.zshrc`
 ### Multi-stage deployment
 
 - `ocpeasy scaffold`
-- `ocpeasy create_stage` (create a new dev stage for your project)
+- `ocpeasy createStage` (create a new dev stage for your project)
 - `ocpeasy deploy --stageId=dev`
-- `ocpeasy create_stage` (create a new prod stage for your project)
+- `ocpeasy createStage` (create a new prod stage for your project)
 - `ocpeasy deploy --stageId=prod`
 
 ### Using OCPeasy behind a proxy
