@@ -1,27 +1,35 @@
 # import openshift as oc
 from .ocUtils import applyStage
-from os import environ
-from .utils import buildStageAssets
+from os import environ, getenv, path
+from .utils import buildStageAssets, removeTrailSlash
+from .notify import missingStage, missingConfigurationFile
+import yaml
+
+from .constants import OCPEASY_CONFIG_NAME
 
 
-def deployStage(projectId: str, stageId: str, proxy: str = None):
-    # print("OpenShift server version: {}".format(oc.get_server_version()))
-    # generateYaml
+def deployStage(stageId: str, proxy: str = None):
     buildStageAssets(stageId, proxy)
     PREFIX_PROJECT_ROOT = environ.get("PROJECT_DEV_PATH", ".")
-    applyStage(projectId, f"{PREFIX_PROJECT_ROOT}/.ocpeasy/{stageId}")
 
-    # Set a project context for all inner `oc` invocations and limit execution to 10 minutes
-    # with oc.project(projectId), oc.timeout(10 * 60):
-    #     # Print the list of qualified pod names (e.g. ['pod/xyz', 'pod/abc', ...]  in the current project
-    #     print(
-    #         "Found the following pods in {}: {}".format(
-    #             oc.get_project_name(), oc.selector("pods").qnames()
-    #         )
-    #     )
+    # TODO: define read ocpeasyConfig function
+    projectDevPath = getenv("PROJECT_DEV_PATH", None)
+    pathProject = "." if not projectDevPath else removeTrailSlash(projectDevPath)
+    ocpPeasyConfigPath = f"{pathProject}/{OCPEASY_CONFIG_NAME}"
 
-    # connect to OCP
-    # TODO: check if the project has been initialized / ocpeasy.yml exists
-    # TODO: check if the selected stage exists in the ocpeasy.yml file
-    # (otherwise ask user if it should be created)
-    # TODO: get oc path from environment variable, if not simply call `oc`
+    if path.isfile(ocpPeasyConfigPath):
+        with open(ocpPeasyConfigPath) as ocpPeasyConfigFile:
+            deployConfigDict = yaml.load(ocpPeasyConfigFile, Loader=yaml.FullLoader)
+            globalValues = dict(deployConfigDict)
+            stage = next(
+                (x for x in globalValues.get("stages") if x.get("stageId") == stageId),
+                None,
+            )
+            if stage:
+                applyStage(
+                    stage.get("projectId"), f"{PREFIX_PROJECT_ROOT}/.ocpeasy/{stageId}"
+                )
+            else:
+                return missingStage()
+    else:
+        return missingConfigurationFile()

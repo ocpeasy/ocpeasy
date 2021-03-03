@@ -19,7 +19,7 @@ create_stage:
 	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) createStage
 
 deploy:
-	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) deploy --projectId=oprod --stageId=prod
+	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) deploy --stageId=prod
 
 destroy:
 	export PROJECT_DEV_PATH=$(PROJECT_DEV_PATH) && $(POETRY_BIN) run python3 $(SOURCE_PATH) destroy --stageId=prod

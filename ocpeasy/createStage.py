@@ -37,7 +37,15 @@ def createStage(proxy: str = None):
             for excluded in excludedKeys:
                 del globalValues[excluded]
 
-            cloneStrategyRepository(sessionId, proxy)
+            proxyFromConfig = deployConfigDict.get("httpProxy", None)
+
+            if proxyFromConfig:
+                cloneStrategyRepository(sessionId, proxyFromConfig)
+            elif proxy:
+                cloneStrategyRepository(sessionId, proxy)
+            else:
+                cloneStrategyRepository(sessionId)
+
             OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
             try:
                 # shutil.rmtree(OCPEASY_DEPLOYMENT_PATH, ignore_errors=True)

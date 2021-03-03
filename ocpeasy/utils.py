@@ -102,13 +102,23 @@ def buildStageAssets(stageId: str, proxy: str):
         tokenConfiguration = dict()
         # TODO: validate ocpeasy.yml file
 
-        cloneStrategyRepository(sessionId, proxy)
-        OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
-
         with open(ocpPeasyConfigPath) as ocpPeasyConfigFile:
+
+            OCPEASY_DEPLOYMENT_PATH = f"{pathProject}/{OCPEASY_CONTEXT_PATH}"
+
             deployConfigDict = dict(
                 yaml.load(ocpPeasyConfigFile, Loader=yaml.FullLoader)
             )
+
+            proxyFromConfig = deployConfigDict.get("httpProxy", None)
+
+            if proxyFromConfig:
+                cloneStrategyRepository(sessionId, proxyFromConfig)
+            elif proxy:
+                cloneStrategyRepository(sessionId, proxy)
+            else:
+                cloneStrategyRepository(sessionId)
+
             # TODO: get stage corresponding to stageId
 
             selectedStages = list(
