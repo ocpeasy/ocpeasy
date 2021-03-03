@@ -31,8 +31,6 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 ### Prerequisites (end user):
 
 - `oc` corresponding to the version used by OpenShift server (https://docs.openshift.com/container-platform/4.1/release_notes/versioning-policy.html)
-<!-- - `curl`
-- `(Windows 10 only) WSL installed` -->
 
 ### Appendix
 
@@ -53,23 +51,6 @@ I added the following to my `.zshrc`
 - [ ] Composing existing stages with modules (e.g.: Databases, Caches, Messaging Queue, other applications etc...)
 - [ ] Support SSH Keys for cloning (read: https://stackoverflow.com/questions/28291909/gitpython-and-ssh-keys)
 
-## Examples
-
-### Pre-requisite
-
-- `oc login`
-
-### Multi-stage deployment
-
-- `ocpeasy scaffold`
-- `ocpeasy createStage` (create a new dev stage for your project)
-- `ocpeasy deploy --stageId=dev`
-- `ocpeasy createStage` (create a new prod stage for your project)
-- `ocpeasy deploy --stageId=prod`
-
-### Using OCPeasy behind a proxy
-
-- `ocpeasy scaffold --proxy=http://proxy.acme-corp.net:3450`
 
 ## License
 
