@@ -1,6 +1,7 @@
 # OCPeasy - Command Line Interface
 
 ![](https://github.com/ocpeasy/ocpeasy/workflows/ocpeasy-ubuntu-ci/badge.svg)
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/https/www.ocpeasy.org)](https://www.ocpeasy.org/)
 ![](badges/coverage.svg)
 
 ## Introduction
