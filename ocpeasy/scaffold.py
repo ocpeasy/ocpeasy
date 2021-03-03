@@ -155,6 +155,7 @@ def scaffold(proxy: str = None):
     del templateMeta["projectName"]
 
     ocpeasyConfig = {
+        "httpProxy": proxy,
         "projectName": scaffoldConfig["projectName"],
         "gitRepository": gitRepository,
         "gitCredentialsId": gitCredentialsId,
