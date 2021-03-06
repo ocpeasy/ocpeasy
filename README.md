@@ -59,7 +59,7 @@ https://www.ocpeasy.org
 
 ### Changelog
 
-- 
+- 2MAR2021 - Initial CLI Version
 
 ## License
 
