@@ -82,13 +82,17 @@ def createStage(proxy: str = None):
                     f"What's the number of replicas required for your app?"
                 )
 
+                dockerfilePath = getPrompt(
+                    f"What's the path of your Dockerfile", "./Dockerfile"
+                )
+
                 stageConfiguration["stageId"] = stageId
                 stageConfiguration["ocpProject"] = ocpProject
                 stageConfiguration["containerId"] = containerId
                 stageConfiguration["containerRoute"] = containerRoute
                 stageConfiguration["podReplicas"] = podReplicas
                 stageConfiguration["modules"] = []
-                stageConfiguration["dockerfile"] = "./Dockerfile"
+                stageConfiguration["dockerfile"] = dockerfilePath
 
             except OSError:
                 print("Creation of the directory %s failed" % OCPEASY_CONTEXT_PATH)
