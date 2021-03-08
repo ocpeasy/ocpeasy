@@ -59,6 +59,7 @@ https://www.ocpeasy.org
 
 ### Changelog
 
+- 8MAR2021 - Configure Dockerfile path from CLI
 - 2MAR2021 - Initial CLI Version
 
 ## License
