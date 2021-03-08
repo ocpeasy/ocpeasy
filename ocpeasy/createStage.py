@@ -54,9 +54,7 @@ def createStage(proxy: str = None):
 
                 # get from CLI (e.g.: --stage=dev) ?
                 # TODO: check if stage already exists
-                stageId = getPrompt(
-                    f"What's the id of your stage (default: development)", "development"
-                )
+                stageId = getPrompt(f"What's the id of your stage", "development")
 
                 similarStageId = list(
                     filter(
