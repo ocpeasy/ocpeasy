@@ -1,14 +1,18 @@
 # import openshift as oc
 from .ocUtils import applyStage
 from os import environ, getenv, path
-from .utils import buildStageAssets, removeTrailSlash
-from .notify import missingStage, missingConfigurationFile
+from .utils import buildStageAssets, removeTrailSlash, isBinAvailableInPath
+from .notify import missingStage, missingConfigurationFile, ocBinaryMissingFromPath
 import yaml
 
 from .constants import OCPEASY_CONFIG_NAME
 
 
 def deployStage(stageId: str, proxy: str = None):
+
+    if not isBinAvailableInPath("oc"):
+        return ocBinaryMissingFromPath()
+
     buildStageAssets(stageId, proxy)
     PREFIX_PROJECT_ROOT = environ.get("PROJECT_DEV_PATH", ".")
 

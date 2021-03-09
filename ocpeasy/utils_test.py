@@ -7,6 +7,7 @@ from .utils import (
     cleanWorkspace,
     replaceAll,
     prepareWorkspace,
+    isBinAvailableInPath,
 )
 
 from os import path
@@ -56,3 +57,8 @@ def test_cloneStrategyRepository():
 
 def test_replaceAll():
     assert replaceAll("[[containerId]]", {"containerId": "helloWorld"}) == "helloWorld"
+
+
+def test_isBinAvailableInPath():
+    assert isBinAvailableInPath("echo")
+    assert not isBinAvailableInPath("f9c685a2-7559-44c5-bc72-8aef952ac911")

@@ -74,6 +74,13 @@ def cleanWorkspace(sessionId: str):
     shutil.rmtree(f"/tmp/{sessionId}", ignore_errors=True)
 
 
+def isBinAvailableInPath(name: str):
+    """Check whether `name` is on PATH and marked as executable."""
+    from shutil import which
+
+    return which(name) is not None
+
+
 def replaceAll(text: str, dic: dict):
     for i in dic.keys():
         text = text.replace(f"{i}", dic.get(i))

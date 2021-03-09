@@ -1,18 +1,30 @@
+ERROR_CHAR = "\u274c"
+SUCCESS_CHAR = "\u2713"
+
+
 def missingConfigurationFile():
-    print(f"\u274c nocpeasy.yml file does not exist, run `ocpeasy scaffold|init` first")
+    print(
+        f"{ERROR_CHAR} nocpeasy.yml file does not exist, run `ocpeasy scaffold|init` first"
+    )
 
 
 def stageCreated(stageId: str, pathProject: str):
-    print(f"\u2713 new OpenShift stage created ({stageId}) for project [{pathProject}]")
+    print(
+        f"{SUCCESS_CHAR} new OpenShift stage created ({stageId}) for project [{pathProject}]"
+    )
 
 
 def ocpeasyConfigFileUpdated():
-    print(f"\u2713 ocpeasy.yml file refreshed")
+    print(f"{SUCCESS_CHAR} ocpeasy.yml file refreshed")
 
 
 def missingStage():
-    print(f"\u274c stage doesn't exist")
+    print(f"{ERROR_CHAR} stage doesn't exist")
 
 
 def ocpeasyStageAssetsGenerated():
-    print(f"\u2713 OpenShift assets generated")
+    print(f"{SUCCESS_CHAR} OpenShift assets generated")
+
+
+def ocBinaryMissingFromPath():
+    print(f"{ERROR_CHAR} oc is not properly installed")
